@@ -1,11 +1,10 @@
 # U-Fund:  _____ disaster relief non-profit _____
-# Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
 
-An online U-Fund system built in Java 17=> and ___ _replace with other platform requirements_ ___
+An online U-Fund system built in Java 17=>, Spring, and Angular CLI=>16
   
 ## Team
 
-- Ansely Orrell
+- Ansley Orrell
 - Abel Girma
 - Aniruddha Roy
 - Gonzalo Estrella
@@ -14,8 +13,9 @@ An online U-Fund system built in Java 17=> and ___ _replace with other platform 
 ## Prerequisites
 
 - Java 11=>17 (Make sure to have correct JAVA_HOME setup in your environment)
+- Spring
 - Maven
--  _add any other tech stack requirements_
+- Angular CLI =>16
 
 
 ## How to run it
