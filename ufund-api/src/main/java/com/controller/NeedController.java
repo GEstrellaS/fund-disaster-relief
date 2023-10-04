@@ -69,9 +69,9 @@ public class NeedController {
     public ResponseEntity<Need[]> searchNeeds(@RequestParam String name) {
         LOG.info("GET /needs/?name="+name);
         try {
-            Need[] need = needDao.findNeeds(name);
-            if (need != null)
-                return new ResponseEntity<Need []>(need,HttpStatus.OK);
+            Need[] needs = needDao.findNeeds(name);
+            if (needs != null)
+                return new ResponseEntity<Need[]>(needs,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -91,7 +91,7 @@ public class NeedController {
                     return new ResponseEntity<Need>(HttpStatus.CONFLICT);
                 }
             }
-            need = needDao.createNeed(need);
+            need = needDao.createNeed(new Need(need.getName(), need.getCost(), need.getQuantity(), need.getType()));
             return new ResponseEntity<>(need,HttpStatus.CREATED);
         }
         catch(IOException e) {
@@ -102,30 +102,37 @@ public class NeedController {
 
     @PutMapping("")
     public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
-        LOG.info("PUT /names " + need);
+        LOG.info("PUT /needs " + need);
 
         try {
-            Need needs = needDao.updateNeed(need);
-            if (need != null)
-                return new ResponseEntity<Need >(need,HttpStatus.OK);
-            else
+            String needName = need.getName();
+            Need existingNeed = needDao.getNeed(needName);
+            if (existingNeed != null) {
+                existingNeed.setName(need.getName());
+                Need updatedNeed = needDao.updateNeed(existingNeed);
+                if (updatedNeed != null) {
+                    return new ResponseEntity<>(updatedNeed, HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }    
+            }
+    } catch (IOException e) {
+        LOG.log(Level.SEVERE, e.getLocalizedMessage());
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+}
 
     @DeleteMapping("/{name}")
     public ResponseEntity<Need> deleteNeed(@PathVariable String name) {
         LOG.info("DELETE /needs/" + name);
 
         try {
-            Need need = needDao.getNeed(name);
-            if (need != null){
-                boolean to_delete = needDao.deleteNeed(name);
-                if (to_delete){
+            Need existingNeed = needDao.getNeed(name);
+            if (existingNeed != null){
+                boolean delete = needDao.deleteNeed(name);
+                if (delete){
                   return new ResponseEntity<>(HttpStatus.OK);
                 }           
                  else{
