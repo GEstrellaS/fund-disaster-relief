@@ -40,7 +40,7 @@ public interface NeedDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Hero getNeed(int id) throws IOException;
+    Hero getNeed(String name) throws IOException;
 
     /**
      * Creates and saves a {@linkplain Hero hero}
@@ -78,5 +78,5 @@ public interface NeedDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteNeed(int id) throws IOException;
+    boolean deleteNeed(String name) throws IOException;
 }

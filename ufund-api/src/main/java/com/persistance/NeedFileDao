@@ -39,7 +39,7 @@ public class NeedFileDAO implements NeedDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public NeedFileDAO(@Value("${heroes.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public NeedFileDAO(@Value("${needs.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();  // load the heroes from the file
@@ -142,10 +142,10 @@ public class NeedFileDAO implements NeedDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Need getNeed(int id) {
+    public Need getNeed(String name) {
         synchronized(needs) {
-            if (needs.containsKey(id))
-                return needs.get(id);
+            if (needs.containsKey(name))
+                return needs.get(name);
             else
                 return null;
         }
