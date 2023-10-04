@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public class Cupboard {
     private ArrayList<Need> needs;
-    private String need;
-    private int amount;
 
-    public Cupboard(){
-        
+    public Cupboard(ArrayList<Need> needs){
+        this.needs = needs;
     }
 
     public int searchNeed(Need need){
@@ -27,5 +25,5 @@ public class Cupboard {
         return false;
     }
 
-    
+
 }
