@@ -1,15 +1,20 @@
-package com.classes;
+package com.model;
+
+import java.util.logging.Logger;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /*
  * Class for Need
 */
 public class Need {
-    private String name;
-    private double cost;
-    private int quantity;
-    private String type;
+    private static final Logger LOG = Logger.getLogger(Need.class.getName());
+    static final String STRING_FORMAT = "Need [name=%s, cost=%d, quantity=%d, type=%s]";
+    @JsonProperty("name") private String name;
+    @JsonProperty("cost") private double cost;
+    @JsonProperty("quantity") private int quantity;
+    @JsonProperty("type") private String type;
 
-    public Need(String name, double cost, int quantity, String type){
+    public Need(@JsonProperty("name") String name, @JsonProperty("cost") double cost, @JsonProperty("quantity") int quantity, @JsonProperty("type") String type){
         this.name = name;
         this.cost = cost;
         this.quantity = quantity;
@@ -80,4 +85,8 @@ public class Need {
         this.quantity = amount;
     }
 
+    @Override
+    public String toString(){
+        return String.format(STRING_FORMAT, name, cost, quantity, type);
+    }
 }

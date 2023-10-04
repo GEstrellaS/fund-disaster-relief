@@ -2,6 +2,8 @@ package com.classes;
 
 import java.util.ArrayList;
 
+import com.model.Need;
+
 public class Cupboard {
     private ArrayList<Need> needs;
 
