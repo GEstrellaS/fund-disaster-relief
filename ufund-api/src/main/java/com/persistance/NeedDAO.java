@@ -1,4 +1,4 @@
-package com.persistence;
+package com.persistance;
 
 import java.io.IOException;
 import com.model.Need;
@@ -27,7 +27,7 @@ public interface NeedDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Hero[] findNeeds(String containsText) throws IOException;
+    Need[] findNeeds(String containsText) throws IOException;
 
     /**
      * Retrieves a {@linkplain Hero hero} with the given id
@@ -40,7 +40,7 @@ public interface NeedDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Hero getNeed(String name) throws IOException;
+    Need getNeed(String name) throws IOException;
 
     /**
      * Creates and saves a {@linkplain Hero hero}
@@ -53,7 +53,7 @@ public interface NeedDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Hero createNeed(Need need) throws IOException;
+    Need createNeed(Need need) throws IOException;
 
     /**
      * Updates and saves a {@linkplain Hero hero}
@@ -65,7 +65,7 @@ public interface NeedDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Hero updateNeed(Need need) throws IOException;
+    Need updateNeed(Need need) throws IOException;
 
     /**
      * Deletes a {@linkplain Hero hero} with the given id

@@ -1,3 +1,5 @@
+package com.persistance;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import com.model.Need;
 @Component
 public class NeedFileDAO implements NeedDAO {
     private static final Logger LOG = Logger.getLogger(NeedFileDAO.class.getName());
-    Map<Integer,Hero> needs;   // Provides a local cache of the hero objects
+    Map<String,Need> needs;   // Provides a local cache of the hero objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Hero
@@ -72,7 +74,7 @@ public class NeedFileDAO implements NeedDAO {
             }
         }
 
-        Hero[] needArray = new Hero[needArrayList.size()];
+        Need[] needArray = new Need[needArrayList.size()];
         needArrayList.toArray(needArray);
         return needArray;
     }
@@ -85,7 +87,7 @@ public class NeedFileDAO implements NeedDAO {
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Hero[] needArray = getNeedsArray();
+        Need[] needArray = getNeedsArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
@@ -108,11 +110,11 @@ public class NeedFileDAO implements NeedDAO {
         // Deserializes the JSON objects from the file into an array of heroes
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        Hero[] needArray = objectMapper.readValue(new File(filename),Need[].class);
+        Need[] needArray = objectMapper.readValue(new File(filename),Need[].class);
 
         // Add each hero to the tree map and keep track of the greatest id
-        for (Hero hero : heroArray) {
-            needs.put(need.getName(),need);
+        for (Need need : needArray) {
+            needs.put(need.getName(), need);
         }
         // Make the next id one greater than the maximum from the file
         return true;
@@ -159,8 +161,8 @@ public class NeedFileDAO implements NeedDAO {
         synchronized(needs) {
             // We create a new hero object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(nextId(),need.getName());
-            needs.put(newNeed.getId(),newNeed);
+            Need newNeed = new Need(need.getName(), need.getCost(), need.getQuantity(), need.getType() );
+            needs.put(need.getName(), need);
             save(); // may throw an IOException
             return newNeed;
         }
@@ -170,12 +172,12 @@ public class NeedFileDAO implements NeedDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Hero updateNeed(Need need) throws IOException {
+    public Need updateNeed(Need need) throws IOException {
         synchronized(needs) {
-            if (needs.containsKey(need.getName() == false)
+            if (needs.containsKey(need.getName())){
                 return null;  // hero does not exist
-
-            needs.put(need.getName(),need);
+            }
+            needs.put(need.getName(), need);
             save(); // may throw an IOException
             return need;
         }
@@ -185,7 +187,7 @@ public class NeedFileDAO implements NeedDAO {
     ** {@inheritDoc}
      */
     @Override
-    public boolean deleteHero(String name) throws IOException {
+    public boolean deleteNeed(String name) throws IOException {
         synchronized(needs) {
             if (needs.containsKey(name)) {
                 needs.remove(name);
@@ -195,4 +197,6 @@ public class NeedFileDAO implements NeedDAO {
                 return false;
         }
     }
+
+
 }
