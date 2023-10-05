@@ -101,15 +101,22 @@ public class NeedController {
     }
 
     @PutMapping("")
-    public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
-        LOG.info("PUT /needs " + need);
-
+    public ResponseEntity<Need> updateNeed(@RequestBody Need incomingNeed) {
+        LOG.info("PUT /needs " + incomingNeed);
+    
         try {
-            String needName = need.getName();
+            String needName = incomingNeed.getName();
             Need existingNeed = needDao.getNeed(needName);
             if (existingNeed != null) {
-                existingNeed.setName(need.getName());
+                // Update all properties of the existingNeed with the values from incomingNeed
+                existingNeed.setName(incomingNeed.getName());
+                existingNeed.setCost(incomingNeed.getCost());
+                existingNeed.setType(incomingNeed.getType());
+                existingNeed.setQuantity(incomingNeed.getQuantity());
+    
+                // Now, update the existingNeed in the data store
                 Need updatedNeed = needDao.updateNeed(existingNeed);
+    
                 if (updatedNeed != null) {
                     return new ResponseEntity<>(updatedNeed, HttpStatus.OK);
                 } else {
@@ -118,11 +125,12 @@ public class NeedController {
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-    } catch (IOException e) {
-        LOG.log(Level.SEVERE, e.getLocalizedMessage());
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-}
+    
 
     @DeleteMapping("/{name}")
     public ResponseEntity<Need> deleteNeed(@PathVariable String name) {

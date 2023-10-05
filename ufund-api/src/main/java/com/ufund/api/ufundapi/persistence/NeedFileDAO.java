@@ -174,7 +174,7 @@ public class NeedFileDAO implements NeedDAO {
     @Override
     public Need updateNeed(Need need) throws IOException {
         synchronized(needs) {
-            if (needs.containsKey(need.getName())){
+            if (!needs.containsKey(need.getName())){
                 return null;  // hero does not exist
             }
             needs.put(need.getName(), need);
