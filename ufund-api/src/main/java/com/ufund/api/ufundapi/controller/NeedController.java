@@ -1,4 +1,4 @@
-package com.controller;
+package com.ufund.api.ufundapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.model.Need;
-import com.persistance.NeedDAO;
+import com.ufund.api.ufundapi.persistence.NeedDAO;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("needs")
+@RequestMapping("needs") 
 public class NeedController {
     private static final Logger LOG = Logger.getLogger(NeedController.class.getName());
     private NeedDAO needDao;
