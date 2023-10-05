@@ -1,4 +1,4 @@
-package com.persistance;
+package com.ufund.api.ufundapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
