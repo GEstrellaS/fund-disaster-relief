@@ -4,9 +4,8 @@ import java.io.IOException;
 import com.model.Need;
 
 /**
- * Defines the interface for Hero object persistence
+ * Defines the interface for Need object persistence
  * 
- * @author 
  */
 public interface NeedDAO {
     /**
@@ -43,11 +42,11 @@ public interface NeedDAO {
     Need getNeed(String name) throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Hero hero}
+     * Creates and saves a {@linkplain Need need}
      * 
-     * @param hero {@linkplain Need need} object to be created and saved
+     * @param need {@linkplain Need need} object to be created and saved
      * <br>
-     * The name of the hero object is ignored and a new uniqe name is assigned
+     * The unique name of the need object is assigned to the object
      *
      * @return new {@link Need need} if successful, false otherwise 
      * 
@@ -74,7 +73,7 @@ public interface NeedDAO {
      * 
      * @return true if the {@link Need need} was deleted
      * <br>
-     * false if hero with the given name does not exist
+     * false if need with the given name does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */

@@ -20,21 +20,16 @@ import com.model.Need;
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  * 
- * @author SWEN Faculty
  */
 @Component
 public class NeedFileDAO implements NeedDAO {
     private static final Logger LOG = Logger.getLogger(NeedFileDAO.class.getName());
-    Map<String,Need> needs;   // Provides a local cache of the hero objects
-                                // so that we don't need to read from the file
-                                // each time
-    private ObjectMapper objectMapper;  // Provides conversion between Hero
-                                        // objects and JSON text format written
-                                        // to the file
-    private String filename;    // Filename to read from and write to
+    Map<String,Need> needs; 
+    private ObjectMapper objectMapper;
+    private String filename;
 
     /**
-     * Creates a Hero File Data Access Object
+     * Creates a Need File Data Access Object
      * 
      * @param filename Filename to read from and write to
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
@@ -44,28 +39,28 @@ public class NeedFileDAO implements NeedDAO {
     public NeedFileDAO(@Value("${needs.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the heroes from the file
+        load();
     }
 
     /**
-     * Generates an array of {@linkplain Hero heroes} from the tree map
+     * Generates an array of {@linkplain Need needs} from the tree map
      * 
-     * @return  The array of {@link Hero heroes}, may be empty
+     * @return  The array of {@link Need needs}, may be empty
      */
     private Need[] getNeedsArray() {
         return getNeedsArray(null);
     }
 
     /**
-     * Generates an array of {@linkplain Hero heroes} from the tree map for any
-     * {@linkplain Hero heroes} that contains the text specified by containsText
+     * Generates an array of {@linkplain Need needs} from the tree map for any
+     * {@linkplain Need needs} that contains the text specified by containsText
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain Hero heroes}
+     * If containsText is null, the array contains all of the {@linkplain Need needs}
      * in the tree map
      * 
-     * @return  The array of {@link Hero heroes}, may be empty
+     * @return  The array of {@link Need needs}, may be empty
      */
-    private Need[] getNeedsArray(String containsText) { // if containsText == null, no filter
+    private Need[] getNeedsArray(String containsText) {
         ArrayList<Need> needArrayList = new ArrayList<>();
 
         for (Need need : needs.values()) {
@@ -80,24 +75,20 @@ public class NeedFileDAO implements NeedDAO {
     }
 
     /**
-     * Saves the {@linkplain Hero heroes} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain Need needs} from the map into the file as an array of JSON objects
      * 
-     * @return true if the {@link Hero heroes} were written successfully
+     * @return true if the {@link Need needs} were written successfully
      * 
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
         Need[] needArray = getNeedsArray();
-
-        // Serializes the Java Objects to JSON objects into the file
-        // writeValue will thrown an IOException if there is an issue
-        // with the file or reading from the file
         objectMapper.writeValue(new File(filename),needArray);
         return true;
     }
 
     /**
-     * Loads {@linkplain Hero heroes} from the JSON file into the map
+     * Loads {@linkplain Need needs} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      * 
@@ -107,16 +98,10 @@ public class NeedFileDAO implements NeedDAO {
      */
     private boolean load() throws IOException {
         needs = new TreeMap<>();
-        // Deserializes the JSON objects from the file into an array of heroes
-        // readValue will throw an IOException if there's an issue with the file
-        // or reading from the file
         Need[] needArray = objectMapper.readValue(new File(filename),Need[].class);
-
-        // Add each hero to the tree map and keep track of the greatest id
         for (Need need : needArray) {
             needs.put(need.getName(), need);
         }
-        // Make the next id one greater than the maximum from the file
         return true;
     }
 

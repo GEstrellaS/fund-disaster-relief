@@ -3,9 +3,9 @@ package com.model;
 import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/*
- * Class for Need
-*/
+/**
+ * Defines the class for Need
+ */
 public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
     static final String STRING_FORMAT = "Need [name=%s, cost=%.2f, quantity=%d, type=%s]";
@@ -14,6 +14,9 @@ public class Need {
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("type") private String type;
 
+    /**
+     * Need constructor
+     */
     public Need(@JsonProperty("name") String name, @JsonProperty("cost") double cost, @JsonProperty("quantity") int quantity, @JsonProperty("type") String type){
         this.name = name;
         this.cost = cost;
@@ -21,7 +24,7 @@ public class Need {
         this.type = type;
     }
 
-    /*
+    /**
      * gets the name of the Need
      * @return name name of the need
      */
@@ -29,7 +32,7 @@ public class Need {
         return this.name;
     }
 
-    /*
+    /**
      * sets the name 
      * @param name the new Name
      */
@@ -37,7 +40,7 @@ public class Need {
         this.name = name;
     }
 
-    /*
+    /**
      * gets the cost of the Need
      * @return cost cost of the need
      */
@@ -45,7 +48,7 @@ public class Need {
         return this.cost;
     }
 
-     /*
+     /**
      * sets the cost 
      * @param cost the new cost
      */
@@ -53,7 +56,7 @@ public class Need {
         this.cost = cost;
     }
 
-    /*
+    /**
      * gets the type of the Need
      * @return type type of the need
      */
@@ -61,7 +64,7 @@ public class Need {
         return this.type;
     }
 
-    /*
+    /**
      * sets the type 
      * @param type the new type
      */
@@ -69,7 +72,7 @@ public class Need {
         this.type = type;
     }
 
-    /*
+    /**
      * gets the quantity of the Need
      * @return quantity quantity of the need
      */
@@ -77,7 +80,7 @@ public class Need {
         return this.quantity;
     }
 
-    /*
+    /**
      * sets the quantity 
      * @param quantity the new quantity
      */
@@ -85,6 +88,9 @@ public class Need {
         this.quantity = amount;
     }
 
+    /**
+     * overrides the default toString and implements a new string format for Need
+     */
     @Override
     public String toString(){
         return String.format(STRING_FORMAT, name, cost, quantity, type);
