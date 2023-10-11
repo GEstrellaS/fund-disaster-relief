@@ -1,7 +1,7 @@
 package com.classes;
 
 /**
- * Defines the Users class
+ * Defines the Users class.
  */
 public class Users {
     private String username;
