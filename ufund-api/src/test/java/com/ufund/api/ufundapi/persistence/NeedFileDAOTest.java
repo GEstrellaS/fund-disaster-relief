@@ -51,7 +51,7 @@ public class NeedFileDAOTest {
 
     @Test
     public void testFindNeeds() {
-        Need[] needs = needFileDAO.findneeds("na");
+        Need[] needs = needFileDAO.findNeeds("na");
 
         assertEquals(needs.length, 2);
         assertEquals(needs[0], testNeeds[1]);
@@ -116,7 +116,7 @@ public class NeedFileDAOTest {
         Need need = new Need("Wonder-Person", 100, 1000, "Toy");
 
         assertThrows(IOException.class,
-                () -> heedFileDAO.createNeed(need),
+                () -> needFileDAO.createNeed(need),
                 "IOException not thrown");
     }
 
