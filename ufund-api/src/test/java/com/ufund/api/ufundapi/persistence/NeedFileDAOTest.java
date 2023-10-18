@@ -32,7 +32,7 @@ public class NeedFileDAOTest {
         testNeeds = new Need[3];
         testNeeds[0] = new Need("Bananas", 100, 800, "Food");
         testNeeds[1] = new Need("Helmet", 50, 700, "Construction");
-        testNeeds[2] = new Need("Napkins", 30, 200, "Sanitary");
+        testNeeds[2] = new Need("Nanapkins", 30, 200, "Sanitary");
 
         when(mockObjectMapper
                 .readValue(new File("doesnt_matter.txt"), Need[].class))
@@ -54,7 +54,7 @@ public class NeedFileDAOTest {
         Need[] needs = needFileDAO.findNeeds("na");
 
         assertEquals(needs.length, 2);
-        assertEquals(needs[0], testNeeds[1]);
+        assertEquals(needs[0], testNeeds[0]);
         assertEquals(needs[1], testNeeds[2]);
     }
 
