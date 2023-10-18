@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.model.Need;
+
 //Gonzalo Estrella
 @Tag("Model-tier")
 public class NeedTest {
@@ -16,10 +18,10 @@ public class NeedTest {
         String expectedType = "Medical Item";
         Need expectedNeed = new Need(expectedName, expectedCost, expectedQuantity, expectedType);
         
-        assertEquals(expectedName,need.getName());
-        assertEquals(expectedCost, need.getCost());
-        assertEquals(expectedQuantity,need.getQuantity());
-        assertEquals(expectedType, need.getType());
+        assertEquals(expectedName, expectedNeed.getName());
+        assertEquals(expectedCost, expectedNeed.getCost());
+        assertEquals(expectedQuantity, expectedNeed.getQuantity());
+        assertEquals(expectedType, expectedNeed.getType());
     }
 
     @Test
@@ -42,10 +44,10 @@ public class NeedTest {
         double cost = 5.01;
         int quantity = 10;
         String type = "Medical Item";
-        Need need = new Need(initialName, expectedCost, expectedQuantity, expectedType);
+        Need need = new Need(name, cost, quantity, type);
         String expectedString = String.format(Need.STRING_FORMAT, name, cost, quantity, type);
 
-        String actualString = hero.toString();
+        String actualString = need.toString();
 
         assertEquals(expectedString,actualString);
     }
