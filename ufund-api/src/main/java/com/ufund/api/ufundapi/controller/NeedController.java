@@ -85,14 +85,13 @@ public class NeedController {
     public ResponseEntity<Need> createNeed(@RequestBody Need need) {
         LOG.info("POST /needs " + need);
         try {
-            Need[] exists=needDao.getNeeds();
-            for (Need exist:exists){
-                if(exist.getName().equals(need.getName())){
-                    return new ResponseEntity<Need>(HttpStatus.CONFLICT);
-                }
+            Need checkNeed = needDao.getNeed(need.getName());
+            if(checkNeed != null){
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-            need = needDao.createNeed(new Need(need.getName(), need.getCost(), need.getQuantity(), need.getType()));
-            return new ResponseEntity<>(need,HttpStatus.CREATED);
+
+            needDao.createNeed(need);
+            return new ResponseEntity<>(need, HttpStatus.CREATED);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
