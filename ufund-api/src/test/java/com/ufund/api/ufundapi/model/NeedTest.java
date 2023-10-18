@@ -39,6 +39,48 @@ public class NeedTest {
     }
 
     @Test
+    public void testCost() {
+        String expectedName = "Insulin";
+        double initialCost = 5.01;
+        int expectedQuantity = 10;
+        String expectedType = "Medical Item";
+        Need expectedNeed = new Need(expectedName, initialCost, expectedQuantity, expectedType);
+        
+        double expectedCost = 10.02;
+        expectedNeed.setCost(expectedCost);
+
+        assertEquals(expectedCost, expectedNeed.getCost());
+    }
+
+    @Test
+    public void testQuantity() {
+        String expectedName = "Insulin";
+        double expectedCost = 5.01;
+        int initialQuantity = 10;
+        String expectedType = "Medical Item";
+        Need expectedNeed = new Need(expectedName, expectedCost, initialQuantity, expectedType);
+        
+        int expectedQuantity = 5;
+        expectedNeed.setQuantity(expectedQuantity);
+
+        assertEquals(expectedQuantity, expectedNeed.getQuantity());
+    }
+
+    @Test
+    public void testType() {
+        String expectedName = "Insulin";
+        double expectedCost = 5.01;
+        int expectedQuantity = 10;
+        String initialType = "Food Item";
+        Need expectedNeed = new Need(expectedName, expectedCost, expectedQuantity, initialType);
+        
+        String expectedType = "Medical Item";
+        expectedNeed.setType(expectedType);
+
+        assertEquals(expectedType, expectedNeed.getType());
+    }
+
+    @Test
     public void testToString() {
         String name = "Insulin";
         double cost = 5.01;
