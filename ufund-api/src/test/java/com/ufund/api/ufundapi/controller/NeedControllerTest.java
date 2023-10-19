@@ -119,5 +119,20 @@ public class NeedControllerTest {
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
+    @Test
+    public void testDeleteNeedNotFound() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        Need need = new Need("Trashcansr", 4.99, 24, "Household");
+        String name = "Trashcans";
+        
+        // when deleteNeed is called return false, simulating failed deletion
+        when(mockNeedDAO.deleteNeed(name)).thenReturn(false);
+
+        // Invoke
+        ResponseEntity<Need> response = needController.deleteNeed(name);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
 
 }
