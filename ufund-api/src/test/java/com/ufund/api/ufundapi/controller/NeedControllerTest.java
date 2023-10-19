@@ -103,4 +103,21 @@ public class NeedControllerTest {
         assertEquals(HttpStatus.OK,response.getStatusCode());
         assertEquals(Needs,response.getBody());
     }
+
+    //Gonzalo Estrella
+    @Test
+    public void testUpdateNeedFailed() throws IOException { // updateHero may throw IOException
+        // Setup
+        Need need = new Need("Trashcans", 6.78, 22, "Household");
+        // when updateHero is called, return true simulating successful
+        // update and save
+        when(mockNeedDAO.updateNeed(need)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Need> response = needController.updateNeed(need);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
 }
