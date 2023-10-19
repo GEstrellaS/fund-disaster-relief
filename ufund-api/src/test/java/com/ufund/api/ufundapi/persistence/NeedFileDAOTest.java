@@ -68,7 +68,7 @@ public class NeedFileDAOTest {
     @Test
     public void testDeleteNeed() {
         // Invoke
-        boolean result = assertDoesNotThrow(() -> needFileDAO.deleteNeed("Banana"),
+        boolean result = assertDoesNotThrow(() -> needFileDAO.deleteNeed("Bananas"),
                 "Unexpected exception thrown");
 
         // Analzye
@@ -95,7 +95,7 @@ public class NeedFileDAOTest {
     @Test
     public void testUpdateNeed() {
         // Setup
-        Need need = new Need("Napkins", 20, 400, "Sanitar");
+        Need need = new Need("Nanapkins", 20, 400, "Sanitar");
 
         // Invoke
         Need result = assertDoesNotThrow(() -> needFileDAO.updateNeed(need),
