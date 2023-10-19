@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -122,7 +123,6 @@ public class NeedControllerTest {
     @Test
     public void testDeleteNeedNotFound() throws IOException { // deleteNeed may throw IOException
         // Setup
-        Need need = new Need("Trashcansr", 4.99, 24, "Household");
         String name = "Trashcans";
         
         // when deleteNeed is called return false, simulating failed deletion
