@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -115,6 +116,20 @@ public class NeedControllerTest {
 
         // Invoke
         ResponseEntity<Need> response = needController.updateNeed(need);
+
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+    @Test
+    public void testDeleteNeedNotFound() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        String name = "Trashcans";
+        
+        // when deleteNeed is called return false, simulating failed deletion
+        when(mockNeedDAO.deleteNeed(name)).thenReturn(false);
+
+        // Invoke
+        ResponseEntity<Need> response = needController.deleteNeed(name);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
