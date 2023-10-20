@@ -120,6 +120,8 @@ public class NeedControllerTest {
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
+
+    //Done by Abel Girma
     @Test
     public void testDeleteNeedNotFound() throws IOException { // deleteNeed may throw IOException
         // Setup
@@ -135,4 +137,18 @@ public class NeedControllerTest {
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
+    // Done by Abel Girma 
+    @Test
+    public void testGetNeedHandleException() throws Exception { // createNeed may throw IOException
+        // Setup
+        String name = "Trashcans";
+        // When getNeed is called on the Mock Need DAO, throw an IOException
+        doThrow(new IOException()).when(mockNeedDAO).getNeed(name);
+
+        // Invoke
+        ResponseEntity<Need> response = needController.getNeed(name);
+    
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 }
