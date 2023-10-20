@@ -151,4 +151,26 @@ public class NeedControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+    // Done by Abel Girma 
+    @Test
+    public void testSearchNeeds() throws IOException { // findNeeds may throw IOException
+        // Setup
+        String searchString = "la";
+    
+        Need[] Needs = new Need[2];
+        Needs[0] = new Need("Toilet Paper", 4.99, 24, "Household");
+        Needs[1] = new Need("Trashcans", 6.78, 22, "Household");
+        // When findNeeds is called with the search string, return the two
+        /// needs above
+        when(mockNeedDAO.findNeeds(searchString)).thenReturn(Needs);
+
+        // Invoke
+        ResponseEntity<Need[]> response = needController.searchNeeds(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(Needs,response.getBody());
+    }
+
 }
