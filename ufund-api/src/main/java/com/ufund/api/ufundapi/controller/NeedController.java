@@ -85,20 +85,36 @@ public class NeedController {
     public ResponseEntity<Need> createNeed(@RequestBody Need need) {
         LOG.info("POST /needs " + need);
         try {
-            Need checkNeed = needDao.getNeed(need.getName());
-            if(checkNeed != null){
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            Need[] exists = needDao.getNeeds();
+            if (exists != null){
+                Need checkNeed = needDao.getNeed(need.getName());
+                if(checkNeed != null){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
+                }
             }
-
-            needDao.createNeed(need);
-            return new ResponseEntity<>(need, HttpStatus.CREATED);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            
+            Need newneed = needDao.createNeed(need);
+            if (newneed != null) {
+                return new ResponseEntity<>(newneed, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } catch (IOException e){
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+
+    /**
+     * Updates the {@linkplain Need Need} with the provided {@linkplain Need need} object, if it exists
+     * 
+     * @param Need The {@link Need need} to update
+     * 
+     * @return ResponseEntity with updated {@link Need need} object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PutMapping("")
     public ResponseEntity<Need> updateNeed(@RequestBody Need incomingNeed) {
         LOG.info("PUT /needs " + incomingNeed);
@@ -119,7 +135,7 @@ public class NeedController {
                 if (updatedNeed != null) {
                     return new ResponseEntity<>(updatedNeed, HttpStatus.OK);
                 } else {
-                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
