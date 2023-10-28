@@ -188,4 +188,68 @@ public class NeedControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
+    //Implemented by Abel Girma 
+    @Test
+    public void testDeleteHero() throws IOException { // deleteHero may throw IOException
+        // Setup
+        String searchString = "an";
+        // Mock the behavior of getHero to return a non-null hero, indicating that the hero exists
+        when(mockNeedDAO.getNeed(searchString)).thenReturn(new Need(searchString, 0, 0, searchString));
+        
+        // when deleteHero is called return true, simulating successful deletion
+        when(mockNeedDAO.deleteNeed(searchString)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<Need> response = needController.deleteNeed(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+    @Test
+    public void testGetHero() throws IOException {  // getHero may throw IOException
+        // Setup
+        Need need = new Need("Trashcans", 6.78, 22, "Household");
+
+        // When the same id is passed in, our mock Hero DAO will return the Hero object
+        when(mockNeedDAO.getNeed(need.getName())).thenReturn(need);
+
+        // Invoke
+        ResponseEntity<Need> response = needController.getNeed(need.getName());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(need,response.getBody());
+    }
+
+    @Test
+    public void testCreateHeroHandleException() throws IOException {  // createHero may throw IOException
+        // Setup
+        Need need = new Need("Trashcans", 6.78, 22, "Household");
+
+        // When createHero is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockNeedDAO).createNeed(need);
+
+        // Invoke
+        ResponseEntity<Need> response = needController.createNeed(need);
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetHeroesHandleException() throws IOException { // getHeroes may throw IOException
+        // Setup
+        // When getHeroes is called on the Mock Hero DAO, throw an IOException
+        doThrow(new IOException()).when(mockNeedDAO).getNeeds();
+
+        // Invoke
+        ResponseEntity<Need[]> response = needController.getNeeds();
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    //Missing tests 
+    //Updateneedhandleexception 
+    //testCreatedHeroFailed
+    //testDeleteHeroHandleexception
 }
