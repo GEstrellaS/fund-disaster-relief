@@ -9,3 +9,32 @@
     <a href="#contact">Contact</a>
     <input type="text" placeholder="Search..">
   </div>
+
+  
+<h2>Cupboard</h2>
+<ul class="needs">
+  <!-- Update the ngFor to iterate over 'needs' -->
+  <li *ngFor="let need of needs">
+    <button [class.selected]="need === selectedNeed" type="button" (click)="onSelect(need)">
+      <span class="name">{{need.name}}</span>
+    </button>
+  </li>
+</ul>
+
+<div *ngIf="selectedNeed">
+  <h2>{{selectedNeed.name | uppercase}} Details</h2>
+  <div>Price: {{selectedNeed.price}}</div>
+  <div>Quantity: {{selectedNeed.quantity}}</div>
+  <div>Type: {{selectedNeed.type}}</div>
+  <div>
+    <label for="need-name">Need name: </label>
+    <!-- <input id="need-name" [(ngModel)]="selectedNeed.name" placeholder="name"> -->
+
+    <label for="need-cost">Price: </label>
+    <!-- <input id="need-cost" [(ngModel)]="selectedNeed.price" placeholder="price"> -->
+
+    <label for="need-quantity">Quantity: </label> 
+    <!-- <input id="need-quantity" [(ngModel)]="selectedNeed.quantity" placeholder="quantity"> -->
+  </div>
+</div>
+

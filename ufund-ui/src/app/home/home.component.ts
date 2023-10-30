@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Need } from '../need';
+import { NEEDS } from '../mock-needs';
+
 
 @Component({
   selector: 'app-home',
@@ -6,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  needs: Need[] = NEEDS;
+  selectedNeed?: Need;
 
+  onSelect(need: Need): void {
+    this.selectedNeed = need;
+}
 }
