@@ -1,6 +1,6 @@
 <div>
-    <h2>Login</h2>
-    <form (ngSubmit)="login()">
+    <h2>Signup</h2>
+    <form (ngSubmit)="signup()">
       <div>
         <label for="username">Username:</label>
         <input type="text" id="username" [(ngModel)]="username" name="username" required>
@@ -9,8 +9,11 @@
         <label for="password">Password:</label>
         <input type="password" id="password" [(ngModel)]="password" name="password" required>
       </div>
-      <button type="submit">Login</button>
+      <div>
+        <label for="repeat">Repeat password:</label>
+        <input type="password" id="repeat" [(ngModel)]="repeatPassword" name="repeatPassword" required>
+      </div>
+      <button type="submit">Signup</button>
     </form>
-    <button [routerLink]="['/signup']">Signup</button>
-  </div>
-  
+    <button [routerLink]="['/login']">Go back</button>
+</div>
