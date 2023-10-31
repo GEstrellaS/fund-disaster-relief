@@ -1,5 +1,12 @@
 /* HeroesComponent's private CSS styles */
 /* Styles for the "Home" button */
+
+.needs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+  gap: 1em; /* Adjust the gap between grid items */
+}
+
 .topnav a.needs-button {
     background-color: #3498db;
     color: white;
