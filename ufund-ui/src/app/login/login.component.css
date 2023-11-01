@@ -1,66 +1,79 @@
-/* HeroesComponent's private CSS styles */
-.needs {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-  }
-  
-  .needs li {
-    display: flex;
-  }
-  
-  .needs button {
-    flex: 1;
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: 0;
-    border-radius: 4px;
-    display: flex;
-    align-items: stretch;
-    height: 1.8em;
-  }
-  
-  .needs button:hover {
-    color: #2c3a41;
-    background-color: #e6e6e6;
-    left: .1em;
-  }
-  
-  .needs button:active {
-    background-color: #525252;
-    color: #fafafa;
-  }
-  
-  .needs button.selected {
-    background-color: black;
-    color: white;
-  }
-  
-  .needs button.selected:hover {
-    background-color: #505050;
-    color: white;
-  }
-  
-  .needs button.selected:active {
-    background-color: black;
-    color: white;
-  }
-  
-  .needs .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #405061;
-    line-height: 1em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
-  
-  .needs .name {
-    align-self: center;
-  }
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+div {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  border-radius: 5px;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+}
+
+/* Form and Input Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* General Button Styles */
+button {
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Login Button Style */
+.login-btn {
+  background-color: #007bff; /* Blue */
+}
+
+.login-btn:hover {
+  background-color: #0056b3; /* Darker Blue */
+}
+
+/* Signup Button Style */
+.signup-btn {
+  background-color: #45a049; /* Green */
+}
+
+.signup-btn:hover {
+  background-color: #347c2c; /* Darker Green */
+}
+
+/* Additional Styles (if needed) */
+/* ... */
