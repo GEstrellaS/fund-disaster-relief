@@ -40,4 +40,10 @@ export class NeedDetailComponent {
 toggleHideDetails() {
   this.hideDetails = !this.hideDetails;
 }
+save(): void {
+  if (this.selectedNeed) {
+    this.needService.updateNeed(this.selectedNeed)
+      .subscribe(() => this.goBack());
+  }
+}
 }

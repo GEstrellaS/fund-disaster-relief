@@ -1,4 +1,4 @@
-<div *ngIf="selectedNeed" [hidden]="hideDetails">
+<div *ngIf="selectedNeed">
     <h2>{{selectedNeed.name | uppercase}} </h2>
     <div>Price: {{selectedNeed.price}}</div>
     <div>Quantity: {{selectedNeed.quantity}}</div>
@@ -13,6 +13,6 @@
       <label for="need-type">Type: </label>
       <input id="need-type" [(ngModel)]="selectedNeed.type" placeholder="Type">
     </div>
-    <button (click)="toggleHideDetails()">Hide Details</button>
     <button type="button" (click)="goBack()">Return to Cupboard</button>
+    <button type="button" (click)="save()">save</button>
   </div>
