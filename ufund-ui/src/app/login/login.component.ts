@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { throwError } from 'rxjs'; // Import throwError
 
 interface User {
   username: string;
   password: string;
-  role: string;
-  email: string;
+  cart: string;
+  isManager: boolean;
 }
 
 @Component({
@@ -23,23 +24,28 @@ export class LoginComponent {
   constructor(private router: Router, private http: HttpClient) {}
 
   login() {
-    this.http.get('assets/users.json').subscribe((users) => {
-      const user = (users as User[]).find(
-        (u) => u.username === this.username && u.password === this.password
-      );
+    // Send a GET request to the Spring Boot login endpoint
+    this.http.get<User>('http://localhost:8080/users/login', {
+      params: {
+        username: this.username,
+        password: this.password
+      }
+    }).subscribe((user: User) => {
       if (user) {
-        if (user.role === "admin") {
+        if (user.isManager) {
           // Authentication successful for admin, navigate to the admin page
           this.router.navigate(['/admin']);
-        } else if (user.role === "user") {
+        } else {
           // Authentication successful for user, navigate to the home page
           this.router.navigate(['/home']);
-        } else {
-          alert(this.errorMessage);
-        }
+        } 
       } else {
         alert(this.errorMessage);
       }
+    },
+    (error) => {
+      // Handle HTTP error here
+      alert(this.errorMessage);
     });
   }
 }

@@ -22,4 +22,5 @@ public interface UserDAO {
 
     DonationCart deleteItermToDonationCart(String user, Need need) throws IOException;
 
+    Users login(String username, String password);
 }

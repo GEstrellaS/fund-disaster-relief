@@ -142,4 +142,14 @@ public class UserFileDAO implements UserDAO{
             return new DonationCart();
         }
     }
+
+    @Override
+    public Users login(String username, String password){
+        for(Users user: users.values()){
+            if((user.getUsername()).equals(username) && (user.getPassword()).equals(password)){
+                return user;
+            }
+        }
+        return null;
+    }
 }
