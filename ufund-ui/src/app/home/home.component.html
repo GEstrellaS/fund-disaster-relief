@@ -1,11 +1,38 @@
-<div>
-    <h2>Home Page</h2>
-    <button type="button">Click Me!</button>
+<div class="header">
+  <h1>Support Morocco Earthquakes</h1>
+  <button class="header-button" type="button">Click Me!</button>
+</div>
+
+<div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <input type="text" class="search-box" placeholder="Search...">
+</div>
+
+<h2>Cupboard</h2>
+<div class="needs">
+  <div *ngFor="let need of needs">
+    <button [class.selected]="need === selectedNeed" type="button" (click)="onSelect(need)">
+      <span class="name">{{need.name}}</span>
+    </button>
   </div>
-  
-  <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <input type="text" placeholder="Search..">
+</div>
+
+
+<div *ngIf="selectedNeed">
+  <h2>{{selectedNeed.name | uppercase}} </h2>
+  <div>Price: {{selectedNeed.price}}</div>
+  <div>Quantity: {{selectedNeed.quantity}}</div>
+  <div>Type: {{selectedNeed.type}}</div>
+  <div class="input-group">
+    <!-- <label for="need-name">Need name: </label> -->
+    <!-- <input id="need-name" [(ngModel)]="selectedNeed.name" placeholder="Name"> -->
+    <!-- <label for="need-cost">Price: </label> -->
+    <!-- <input id="need-cost" [(ngModel)]="selectedNeed.price" placeholder="Price"> -->
+    <!-- <label for="need-quantity">Quantity: </label> -->
+    <!-- <input id="need-quantity" [(ngModel)]="selectedNeed.quantity" placeholder="Quantity"> -->
   </div>
+</div>
+
+
