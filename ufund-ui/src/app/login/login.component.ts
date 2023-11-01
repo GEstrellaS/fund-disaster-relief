@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { throwError } from 'rxjs'; // Import throwError
 
 interface User {
   username: string;
@@ -41,6 +42,10 @@ export class LoginComponent {
       } else {
         alert(this.errorMessage);
       }
+    },
+    (error) => {
+      // Handle HTTP error here
+      alert(this.errorMessage);
     });
   }
 }
