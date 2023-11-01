@@ -1,51 +1,41 @@
-/* HeroesComponent's private CSS styles */
-/* Styles for the "Home" button */
-.topnav a.needs-button {
-  background-color: #3498db;
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header Styles */
+.header {
+  background-color: #007BFF;
   color: white;
-  font-weight: bold;
+  padding: 20px;
   text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header-button {
+  background-color: #0069D9;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
+  border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s;
-  transform-origin: center;
-  padding: 1.5em 3em;
-  height: 8em;
-  margin: 0.5em; /* Adjust the margin to your preference */
+  transition: background-color 0.3s;
 }
 
-
-.topnav a.needs-button:hover {
-  background-color: #2980b9;
-  transform: scale(1.05); /* Enlarge the button on hover */
+.header-button:hover {
+  background-color: #0056b3;
 }
 
-.topnav a.needs-button:active {
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
-  transform: scale(0.95); /* Slight shrink on click */
-}
-
-
-.topnav a.needs-button.selected {
-  background-color: #e74c3c;
-  transform: scale(1.05); /* Enlarge the selected button */
-}
-
-.topnav a.needs-button.selected:hover {
-  background-color: #c0392b;
-  transform: scale(1.05); /* Enlarge the selected button on hover */
-}
-
-
-/* The rest of your existing CSS for the navigation bar remains unchanged */
+/* Top Navigation Styles */
 .topnav {
-  background-color: #333;
   overflow: hidden;
+  background-color: #333;
 }
 
 .topnav a {
@@ -55,6 +45,7 @@
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  transition: background-color 0.3s;
 }
 
 .topnav a:hover {
@@ -62,13 +53,50 @@
   color: black;
 }
 
-.search-box {
-  float: right;
-  margin: 14px 16px;
-}
-
 .topnav a.active {
   background-color: #4CAF50;
   color: white;
 }
 
+.search-box {
+  float: right;
+  padding: 10px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+/* Styling for the Needs Section */
+.needs button {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.needs button.selected {
+  background-color: #5cb85c;
+  color: #fff;
+  border-color: #4cae4c;
+}
+
+.needs button:hover {
+  background-color: #e6e6e6;
+}
+
+.needs .name {
+  font-weight: bold;
+}
+
+/* Styles for the Selected Need Details */
+.selectedNeed {
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
