@@ -31,6 +31,17 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
+    @GetMapping("/login")
+	public ResponseEntity<Users> loginUser(@RequestParam("username") String username, @RequestParam("password") String password){
+		LOG.info("GET /users/login?username=" + username + "&password=" + password);
+		Users user = userDAO.login(username, password);
+        if (user != null) {
+        	return new ResponseEntity<Users>(user, HttpStatus.OK);
+        } else {
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+	}
+
 
     @GetMapping("/{username}")
     public ResponseEntity<Users> getUser(@PathVariable String username) {
