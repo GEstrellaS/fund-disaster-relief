@@ -8,16 +8,14 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.DonationCart;
 import com.model.Need;
 import com.model.Users;
 
+@Component
 public class UserFileDAO implements UserDAO{
 
     private static final Logger LOG = Logger.getLogger(NeedFileDAO.class.getName());
