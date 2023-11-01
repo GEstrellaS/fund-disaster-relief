@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { AdminComponent } from './admin/admin.component';
+import { MessagesComponent } from './messages/messages.component';
+import { NeedDetailComponent } from './need-detail/need-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { AdminComponent } from './admin/admin.component';
     HomeComponent,
     SignupComponent,
     AdminComponent,
+    MessagesComponent,
+    NeedDetailComponent,
   ],
   imports: [
     BrowserModule,

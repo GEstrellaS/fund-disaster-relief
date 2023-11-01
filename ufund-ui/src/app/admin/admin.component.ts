@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
-import { NEEDS } from '../mock-needs';
+//import { NEEDS } from '../mock-needs';
+import { NeedService } from '../need.service';
+import { MessageService } from '../message.service';
+
 
 @Component({
   selector: 'app-admin',
@@ -8,17 +11,31 @@ import { NEEDS } from '../mock-needs';
   styleUrls: ['./admin.component.css']
 })
 
-export class AdminComponent {
-  needs: Need[] = NEEDS;
+export class AdminComponent implements OnInit {
   selectedNeed?: Need;
+  needs: Need[] = [];
+  //needs:Need[] =NEEDS
   hideDetails = false;
+
+  constructor(private needService: NeedService, 
+    private messageService: MessageService) {}
+
+  ngOnInit(): void {
+    this.getNeeds();
+  }
+
+  onSelect(need: Need): void {
+    this.selectedNeed = need;
+    this.messageService.add(`HeroesComponent: 
+    Selected need name=${need.name}`);
+    this.hideDetails = false;
+  }
 
   toggleHideDetails() {
     this.hideDetails = !this.hideDetails;
   }
-
-  onSelect(need: Need): void {
-  this.selectedNeed = need;
-  this.hideDetails = false;
-}
+  getNeeds(): void {
+    this.needService.getNeeds()
+        .subscribe(needs => this.needs = needs);
+  }
 }

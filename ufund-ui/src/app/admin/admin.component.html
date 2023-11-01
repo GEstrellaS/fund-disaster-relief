@@ -1,15 +1,27 @@
 
 <h2>Cupboard</h2>
-<div class="needs">
+<!-- <div class="needs">
   <div *ngFor="let need of needs">
     <button [class.selected]="need === selectedNeed" type="button" (click)="onSelect(need)">
       <span class="name">{{need.name}}</span>
     </button>
   </div>
 </div>
+<app-need-detail [selectedNeed]="selectedNeed"></app-need-detail> -->
 
 
-<div *ngIf="selectedNeed" [hidden]="hideDetails">
+<div class="needs">
+  <div *ngFor="let need of needs">
+    <a routerLink="/detail/{{need.name}}">
+      <span class="need">{{need.name}}</span>
+    </a>
+  </div>
+</div>
+<app-need-detail [selectedNeed]="selectedNeed"></app-need-detail>
+
+
+
+<!-- <div *ngIf="selectedNeed" [hidden]="hideDetails">
   <h2>{{selectedNeed.name | uppercase}} </h2>
   <div>Price: {{selectedNeed.price}}</div>
   <div>Quantity: {{selectedNeed.quantity}}</div>
@@ -25,4 +37,4 @@
     <input id="need-type" [(ngModel)]="selectedNeed.type" placeholder="Type">
   </div>
   <button (click)="toggleHideDetails()">Hide Details</button>
-</div>
+</div> -->
