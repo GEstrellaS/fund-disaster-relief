@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { throwError } from 'rxjs'; // Import throwError
 
 interface User {
   username: string;
   password: string;
-  role: string;
-  email: string;
+  cart: string;
+  isManager: boolean;
 }
 
 @Component({
@@ -23,23 +24,24 @@ export class LoginComponent {
   constructor(private router: Router, private http: HttpClient) {}
 
   login() {
-    this.http.get('assets/users.json').subscribe((users) => {
-      const user = (users as User[]).find(
-        (u) => u.username === this.username && u.password === this.password
-      );
+    this.http.get<User>('http://localhost:8080/users/login', {
+      params: {
+        username: this.username,
+        password: this.password
+      }
+    }).subscribe((user: User) => {
       if (user) {
-        if (user.role === "admin") {
-          // Authentication successful for admin, navigate to the admin page
+        if (user.isManager) {
           this.router.navigate(['/admin']);
-        } else if (user.role === "user") {
-          // Authentication successful for user, navigate to the home page
-          this.router.navigate(['/home']);
         } else {
-          alert(this.errorMessage);
-        }
+          this.router.navigate(['/home']);
+        } 
       } else {
         alert(this.errorMessage);
       }
+    },
+    (error) => {
+      alert(this.errorMessage);
     });
   }
 }

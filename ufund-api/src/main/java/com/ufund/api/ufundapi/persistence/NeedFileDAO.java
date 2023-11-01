@@ -182,6 +182,4 @@ public class NeedFileDAO implements NeedDAO {
                 return false;
         }
     }
-
-
 }
