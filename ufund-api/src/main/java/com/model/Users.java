@@ -1,10 +1,12 @@
-package com.classes;
+package com.model;
 
 /**
  * Defines the Users class.
  */
 public class Users {
     private String username;
+    private String password;
+    private DonationCart donationCart;
     private boolean isManager;
 
     /**
@@ -12,8 +14,10 @@ public class Users {
      * @param username String
      * @param isManager bool
      */
-    public Users(String username, boolean isManager){
+    public Users(String username, String password, boolean isManager){
         this.username = username;
+        this.password = password;
+        this.donationCart = new DonationCart();
         this.isManager = isManager;
     }
 
@@ -32,4 +36,5 @@ public class Users {
     public boolean isManager(){
         return this.isManager;
     }
+
 }
