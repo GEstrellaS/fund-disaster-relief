@@ -24,7 +24,6 @@ export class LoginComponent {
   constructor(private router: Router, private http: HttpClient) {}
 
   login() {
-    // Send a GET request to the Spring Boot login endpoint
     this.http.get<User>('http://localhost:8080/users/login', {
       params: {
         username: this.username,
@@ -33,10 +32,8 @@ export class LoginComponent {
     }).subscribe((user: User) => {
       if (user) {
         if (user.isManager) {
-          // Authentication successful for admin, navigate to the admin page
           this.router.navigate(['/admin']);
         } else {
-          // Authentication successful for user, navigate to the home page
           this.router.navigate(['/home']);
         } 
       } else {
@@ -44,7 +41,6 @@ export class LoginComponent {
       }
     },
     (error) => {
-      // Handle HTTP error here
       alert(this.errorMessage);
     });
   }
