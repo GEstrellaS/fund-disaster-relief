@@ -1,28 +1,31 @@
-
 <h2>Cupboard</h2>
+
 <div class="needs">
   <div *ngFor="let need of needs">
-    <button [class.selected]="need === selectedNeed" type="button" (click)="onSelect(need)">
-      <span class="name">{{need.name}}</span>
-    </button>
+    <a routerLink="/detail/{{need.name}}">
+      <span class="need">{{need.name}}</span>
+    </a>
   </div>
 </div>
+<app-need-detail [selectedNeed]="selectedNeed"></app-need-detail>
 
 
-<div *ngIf="selectedNeed" [hidden]="hideDetails">
-  <h2>{{selectedNeed.name | uppercase}} </h2>
-  <div>Price: {{selectedNeed.price}}</div>
-  <div>Quantity: {{selectedNeed.quantity}}</div>
-  <div>Type: {{selectedNeed.type}}</div>
-  <div class="input-group">
-    <label for="need-name">Need name: </label> 
-    <input id="need-name" [(ngModel)]="selectedNeed.name" placeholder="Name">
-    <label for="need-cost">Price: </label>
-    <input id="need-cost" [(ngModel)]="selectedNeed.price" placeholder="Price">
-    <label for="need-quantity">Quantity: </label>
-    <input id="need-quantity" [(ngModel)]="selectedNeed.quantity" placeholder="Quantity">
-    <label for="need-type">Type: </label>
-    <input id="need-type" [(ngModel)]="selectedNeed.type" placeholder="Type">
+<div>
+  <div>
+    <form (ngSubmit)="onSubmit()">
+      <label for="name">Need name:</label>
+      <input id="name" [(ngModel)]="newNeed.name" name="name" />
+
+      <label for="price">Price:</label>
+      <input id="price" [(ngModel)]="newNeed.price" name="price" />
+
+      <label for="quantity">Quantity:</label>
+      <input id="quantity" [(ngModel)]="newNeed.quantity" name="quantity" />
+
+      <label for="type">Type:</label>
+      <input id="type" [(ngModel)]="newNeed.type" name="type" />
+
+      <button type="submit">Submit</button>
+    </form>
   </div>
-  <button (click)="toggleHideDetails()">Hide Details</button>
 </div>
