@@ -12,7 +12,7 @@ public interface UserDAO {
 
     Users[] getUsers(String containsText) throws IOException;
 
-    Users createUser(Users user) throws IOException;
+    String createUser(String username, String password) throws IOException;
 
     boolean deleteUser(String user) throws IOException;
 

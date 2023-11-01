@@ -96,16 +96,16 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Users> createUser(@RequestBody Users user) {
-        LOG.info("POST /users " + user);
+    public ResponseEntity<String> createUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+        LOG.info("POST /users?username=" + username+"&password=" +password+"");
         try {
-            Users checkUser = userDAO.getUser(user.getUsername());
+            Users checkUser = userDAO.getUser(username);
             if(checkUser != null){
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
 
-            userDAO.createUser(user);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
+            userDAO.createUser(username, password);
+            return new ResponseEntity<>(username, HttpStatus.CREATED);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

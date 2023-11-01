@@ -74,18 +74,18 @@ public class UserFileDAO implements UserDAO{
     }
 
     @Override
-    public Users createUser(Users user) throws IOException {
+    public String createUser(String username, String password) throws IOException {
         synchronized(users) {
             for (Users u : users.values()) {
-                if (u.getUsername().equals(user.getUsername())) {
+                if (u.getUsername().equals(username)) {
                     return null;
                 }
             }
 
-            Users newUser = new Users(user.getUsername(), user.getPassword(), user.isManager());
-            users.put(user.getUsername(), user);
+            Users newUser = new Users(username, password, false);
+            users.put(newUser.getUsername(), newUser);
             save();
-            return newUser;
+            return username;
         }
     }
 
