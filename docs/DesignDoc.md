@@ -94,7 +94,10 @@ This section describes the application architecture.
 ### Summary
 
 The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
-**NOTE**: detailed diagrams are required in later sections of this document. (_When requested, replace this diagram with your **own** rendition and representations of sample classes of your system_.) 
+
+Our application is comprised of three primary components: the view, the MoroccoReliefFund API, and the storage. The MoroccoReliefFund UI, part of the view component, is developed with HTML, CSS, and TypeScript using the Angular framework. The view component is responsible for sending HTTP requests to the eStore API, which then returns HTTP responses. Within the eStore API component, we have the view model and the model. The controller and services, both written in Java, are located in the view model. The controller additionally utilizes the Spring framework. The model comprises our persistence layer and our application model, also written in Java. The eStore API interfaces with the storage through I/O operations. The storage itself consists of JSON files.
+
+![application components](application-components.png)
 
 ![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
 
@@ -150,7 +153,7 @@ However, if the user enters the username "admin" on the login page, they are dir
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
-
+![uml diagram.](uml-placeholder.png)
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 >
@@ -182,7 +185,9 @@ However, if the user enters the username "admin" on the login page, they are dir
 
 > have not had any testing yet. Highlight the issues found during
 
-> acceptance testing and if there are any concerns._
+> acceptance testing and if there are any concerns.
+
+15/15 user stories passed all their acceptance criteria tests. 25/31 acceptance criteria tests have passed - at a high code coverage - at least 90% overall.
 
 
 ### Unit Testing and Code Coverage
@@ -193,3 +198,32 @@ However, if the user enters the username "admin" on the login page, they are dir
 
 >_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
+![acceptance testing 1](acceptance-testing1.png)
+We can see from the unit test above we have not tested all limits of the code, 
+because of this the team will continue working on the tests to be able to check 
+and test all aspects of the different function such as the update need which is 
+missing 25%. In the Need Controller class, we must implement tests that check 
+exceptions.
+
+
+![acceptance testing 2](acceptance-testing2.png)
+The unit tests for this component are good because the unit 
+tests we implemented for this class cover a wide variety of 
+tests. The unit tests created for this class evaluate if the Need 
+class correctly formats into a string and if the setters and 
+getters for each attribute works.
+
+![acceptance testing 3](acceptance-testing3.png)
+The code coverage for this component is good because the unit 
+tests we implemented for this class cover a wide variety of 
+tests. The unit tests created for this NeedFileDAO class 
+evaluate if the persistence tier correctly formats into a string. 
+Also, it checks if the setters, getters, updateNeed, createNeed
+and deleteNeed function correctly.
+
+![acceptance testing 4](acceptance-testing4.png)
+The unit tests for this component are good because the unit 
+tests we implemented for this class cover a wide variety of 
+tests. The unit tests created for this class evaluate if the Need 
+class correctly formats into a string and if the setters and 
+getters for each attribute works.
