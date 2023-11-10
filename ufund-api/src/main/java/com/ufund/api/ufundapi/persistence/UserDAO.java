@@ -16,11 +16,5 @@ public interface UserDAO {
 
     boolean deleteUser(String user) throws IOException;
 
-    DonationCart getDonationCart(String user) throws IOException;
-
-    DonationCart addItemToDonationCart(String user, Need need) throws IOException;
-
-    DonationCart deleteItermToDonationCart(String user, Need need) throws IOException;
-
     Users login(String username, String password);
 }
