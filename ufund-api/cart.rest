@@ -1,0 +1,12 @@
+GET http://localhost:8080/cart/ansley
+
+###
+POST http://localhost:8080/cart/ansley/add/need
+Content-Type: application/json
+
+{
+    "name":"Chairs",
+    "cost":0.0,
+    "quantity":87,
+    "type":"plastic"
+}

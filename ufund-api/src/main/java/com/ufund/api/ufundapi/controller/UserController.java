@@ -136,41 +136,4 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("/cart/{username}")
-	public ResponseEntity<DonationCart> getDonationCart(@PathVariable("username") String usernameString) {
-		LOG.info("GET /user/cart/" + usernameString);
-		try {
-			DonationCart cart = userDAO.getDonationCart(usernameString);
-			return new ResponseEntity<DonationCart>(cart, HttpStatus.OK);
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-    @PostMapping("/cart/{username}/add/need")
-	public ResponseEntity<DonationCart> addItemToCart(@PathVariable("username") String usernameString, @RequestBody Need need) {
-		LOG.info("POST /users/" + "/cart/" + usernameString +"/add/" + need);
-		try {
-			DonationCart cart = userDAO.addItemToDonationCart(usernameString, need);
-			return new ResponseEntity<DonationCart>(cart, HttpStatus.OK);
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-    @PostMapping("/cart/{username}/delete/need")
-	public ResponseEntity<DonationCart> deleteItemToCart(@PathVariable("username") String usernameString, @RequestBody Need need) {
-		LOG.info("POST /users/" + "/cart/" + usernameString +"/delete/" + need);
-		try {
-			DonationCart cart = userDAO.deleteItermToDonationCart(usernameString, need);
-			return new ResponseEntity<DonationCart>(cart, HttpStatus.OK);
-		} catch (IOException e) {
-			LOG.log(Level.SEVERE, e.getLocalizedMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
 }

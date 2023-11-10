@@ -102,48 +102,6 @@ public class UserFileDAO implements UserDAO{
     }
 
     @Override
-    public DonationCart getDonationCart(String username) throws IOException {
-        for(Users user: users.values()){
-            if((user.getUsername()).equals(username)){
-                return user.getDonationCart();
-            }
-        }
-        return new DonationCart();
-    }
-
-    @Override
-    public DonationCart addItemToDonationCart(String username, Need need) throws IOException {
-        if( need == null ){
-            return new DonationCart();
-        }else{
-            for(Users user: users.values()){
-                if((user.getUsername()).equals(username)){
-                    user.getDonationCart().addItem(need);
-                    save();
-                    return user.getDonationCart();
-                }
-            }
-            return new DonationCart();
-        }
-    }
-
-    @Override
-    public DonationCart deleteItermToDonationCart(String username, Need need) throws IOException {
-        if( need == null ){
-            return new DonationCart();
-        }else{
-            for(Users user: users.values()){
-                if((user.getUsername()).equals(username)){
-                    user.getDonationCart().removeItem(need);
-                    save();
-                    return user.getDonationCart();
-                }
-            }
-            return new DonationCart();
-        }
-    }
-
-    @Override
     public Users login(String username, String password){
         for(Users user: users.values()){
             if((user.getUsername()).equals(username) && (user.getPassword()).equals(password)){

@@ -56,7 +56,7 @@ public class NeedControllerTest {
     @Test
     public void testCreateNeed() throws IOException {  // createNeed may throw IOException
         // Setup
-        Need need = new Need("Toilet Paper", 4.99, 24, "Household");
+        Need need = new Need("Toilet Paper", 4.99, 24, 30, "Household");
         // when createNeed is called, return true simulating successful
         // creation and save
         when(mockNeedDAO.createNeed(need)).thenReturn(need);
@@ -72,8 +72,8 @@ public class NeedControllerTest {
     @Test
     public void testUpdateneed() throws IOException { // updateneed may throw IOException
         // Setup
-        Need existingNeed = new Need("Toilet Paper", 4.99, 24, "Household");
-        Need needToUpdate = new Need("Toilet Paper", 5.99, 24, "Household");
+        Need existingNeed = new Need("Toilet Paper", 4.99, 24, 30, "Household");
+        Need needToUpdate = new Need("Toilet Paper", 5.99, 24, 30, "Household");
         // when updateneed is called, return true simulating successful
         // update and save
 
@@ -92,8 +92,8 @@ public class NeedControllerTest {
     public void testGetNeeds() throws IOException { // getNeeds may throw IOException
         // Setup
         Need[] Needs = new Need[2];
-        Needs[0] = new Need("Toilet Paper", 4.99, 24, "Household");
-        Needs[1] = new Need("Trashcans", 6.78, 22, "Household");
+        Needs[0] = new Need("Toilet Paper", 4.99, 24, 30, "Household");
+        Needs[1] = new Need("Trashcans", 6.78, 22, 30, "Household");
         // When getNeeds is called return the Needs created above
         when(mockNeedDAO.getNeeds()).thenReturn(Needs);
 
@@ -109,7 +109,7 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeedFailed() throws IOException { // updateHero may throw IOException
         // Setup
-        Need need = new Need("Trashcans", 6.78, 22, "Household");
+        Need need = new Need("Trashcans", 6.78, 22, 30, "Household");
         // when updateHero is called, return true simulating successful
         // update and save
         when(mockNeedDAO.updateNeed(need)).thenReturn(null);
@@ -159,8 +159,8 @@ public class NeedControllerTest {
         String searchString = "la";
     
         Need[] Needs = new Need[2];
-        Needs[0] = new Need("Toilet Paper", 4.99, 24, "Household");
-        Needs[1] = new Need("Trashcans", 6.78, 22, "Household");
+        Needs[0] = new Need("Toilet Paper", 4.99, 24, 30, "Household");
+        Needs[1] = new Need("Trashcans", 6.78, 22, 30, "Household");
         // When findNeeds is called with the search string, return the two
         /// needs above
         when(mockNeedDAO.findNeeds(searchString)).thenReturn(Needs);
@@ -194,7 +194,7 @@ public class NeedControllerTest {
         // Setup
         String searchString = "an";
         // Mock the behavior of getHero to return a non-null hero, indicating that the hero exists
-        when(mockNeedDAO.getNeed(searchString)).thenReturn(new Need(searchString, 0, 0, searchString));
+        when(mockNeedDAO.getNeed(searchString)).thenReturn(new Need(searchString, 0, 0, 0, searchString));
         
         // when deleteHero is called return true, simulating successful deletion
         when(mockNeedDAO.deleteNeed(searchString)).thenReturn(true);
@@ -208,7 +208,7 @@ public class NeedControllerTest {
     @Test
     public void testGetHero() throws IOException {  // getHero may throw IOException
         // Setup
-        Need need = new Need("Trashcans", 6.78, 22, "Household");
+        Need need = new Need("Trashcans", 6.78, 22, 30, "Household");
 
         // When the same id is passed in, our mock Hero DAO will return the Hero object
         when(mockNeedDAO.getNeed(need.getName())).thenReturn(need);
@@ -224,7 +224,7 @@ public class NeedControllerTest {
     @Test
     public void testCreateHeroHandleException() throws IOException {  // createHero may throw IOException
         // Setup
-        Need need = new Need("Trashcans", 6.78, 22, "Household");
+        Need need = new Need("Trashcans", 6.78, 22, 30, "Household");
 
         // When createHero is called on the Mock Hero DAO, throw an IOException
         doThrow(new IOException()).when(mockNeedDAO).createNeed(need);

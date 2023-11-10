@@ -1,0 +1,12 @@
+<div *ngIf="user" style="height: 50vh; overflow-y: scroll;">
+    <h2>{{user.name}}'s Cart:</h2>
+    <div *ngFor="let entry of products | keyvalue">
+        <label>{{entry.key}}:</label>
+        <div *ngFor="let item of entry.value; index as i">
+            <label *ngIf="i%2 == 0">{{item}} oz package</label>
+            <label *ngIf="i%2 == 0">: ${{entry.value[i+1]}}</label>
+            <button *ngIf="i%2 == 0" type="button" class="delete-button" (click)="removeItemFromCart(i)">x</button>
+          </div>
+    </div>
+</div>
+

@@ -146,7 +146,7 @@ public class NeedFileDAO implements NeedDAO {
         synchronized(needs) {
             // We create a new hero object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(need.getName(), need.getCost(), need.getQuantity(), need.getType() );
+            Need newNeed = new Need(need.getName(), need.getCost(), need.getCurrentQuantity(), need.getRequiredQuantity(), need.getType() );
             needs.put(need.getName(), need);
             save(); // may throw an IOException
             return newNeed;
