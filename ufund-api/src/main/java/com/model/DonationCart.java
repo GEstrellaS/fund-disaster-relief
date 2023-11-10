@@ -16,7 +16,7 @@ public class DonationCart {
     public void incrementItem(Need item, int quantity) {
         for (Need cartItem : donationCart) {
             if (cartItem.getName().equals(item.getName())) {
-                cartItem.setQuantity(cartItem.getQuantity() + quantity);
+                cartItem.setCurrentQuantity(cartItem.getCurrentQuantity() + quantity);
                 return;
             }
         }
@@ -25,11 +25,11 @@ public class DonationCart {
     public void decrementItem(Need item, int quantity) {
         for (Need cartItem : donationCart) {
             if (cartItem.getName().equals(item.getName())) {
-                int newQuantity = cartItem.getQuantity() - quantity;
+                int newQuantity = cartItem.getCurrentQuantity() - quantity;
                 if (newQuantity <= 0) {
                     donationCart.remove(cartItem);
                 } else {
-                    cartItem.setQuantity(newQuantity);
+                    cartItem.setCurrentQuantity(newQuantity);
                 }
                 return;
             }

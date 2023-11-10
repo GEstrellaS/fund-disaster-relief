@@ -127,7 +127,8 @@ public class NeedController {
                 existingNeed.setName(incomingNeed.getName());
                 existingNeed.setCost(incomingNeed.getCost());
                 existingNeed.setType(incomingNeed.getType());
-                existingNeed.setQuantity(incomingNeed.getQuantity());
+                existingNeed.setCurrentQuantity(incomingNeed.getCurrentQuantity());
+                existingNeed.setRequiredQuantity(incomingNeed.getRequiredQuantity());
     
                 // Now, update the existingNeed in the data store
                 Need updatedNeed = needDao.updateNeed(existingNeed);

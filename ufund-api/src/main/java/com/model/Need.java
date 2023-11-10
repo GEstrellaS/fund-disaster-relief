@@ -11,16 +11,18 @@ public class Need {
     public final static String STRING_FORMAT = "Need [name=%s, cost=%.2f, quantity=%d, type=%s]";
     @JsonProperty("name") private String name;
     @JsonProperty("cost") private double cost;
-    @JsonProperty("quantity") private int quantity;
+    @JsonProperty("currentQuantity") private int currentQuantity;
+    @JsonProperty("requiredQuantity") private int requiredQuantity;
     @JsonProperty("type") private String type;
 
     /**
      * Need constructor
      */
-    public Need(@JsonProperty("name") String name, @JsonProperty("cost") double cost, @JsonProperty("quantity") int quantity, @JsonProperty("type") String type){
+    public Need(@JsonProperty("name") String name, @JsonProperty("cost") double cost, @JsonProperty("currentQuantity") int currentQuantity, @JsonProperty("requiredQuantity") int requiredQuantity, @JsonProperty("type") String type){
         this.name = name;
         this.cost = cost;
-        this.quantity = quantity;
+        this.currentQuantity = currentQuantity; 
+        this.requiredQuantity = requiredQuantity; 
         this.type = type;
     }
 
@@ -76,16 +78,24 @@ public class Need {
      * gets the quantity of the Need
      * @return quantity quantity of the need
      */
-    public int getQuantity(){
-        return this.quantity;
+    public int getCurrentQuantity(){
+        return this.currentQuantity;
+    }
+
+    public int getRequiredQuantity(){
+        return this.requiredQuantity;
     }
 
     /**
      * sets the quantity 
      * @param quantity the new quantity
      */
-    public void setQuantity(int amount){
-        this.quantity = amount;
+    public void setCurrentQuantity(int amount){
+        this.currentQuantity = amount;
+    }
+
+    public void setRequiredQuantity(int amount){
+        this.requiredQuantity = amount;
     }
 
     /**
@@ -93,6 +103,6 @@ public class Need {
      */
     @Override
     public String toString(){
-        return String.format(STRING_FORMAT, name, cost, quantity, type);
+        return String.format(STRING_FORMAT, name, cost, currentQuantity, requiredQuantity,type);
     }
 }

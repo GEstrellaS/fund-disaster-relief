@@ -30,9 +30,9 @@ public class NeedFileDAOTest {
     public void setupNeedFileDAO() throws IOException {
         mockObjectMapper = mock(ObjectMapper.class);
         testNeeds = new Need[3];
-        testNeeds[0] = new Need("Bananas", 100, 800, "Food");
-        testNeeds[1] = new Need("Helmet", 50, 700, "Construction");
-        testNeeds[2] = new Need("Nanapkins", 30, 200, "Sanitary");
+        testNeeds[0] = new Need("Bananas", 100, 800, 1000,"Food");
+        testNeeds[1] = new Need("Helmet", 50, 700, 1000, "Construction");
+        testNeeds[2] = new Need("Nanapkins", 30, 200, 1000, "Sanitary");
 
         when(mockObjectMapper
                 .readValue(new File("doesnt_matter.txt"), Need[].class))
@@ -79,7 +79,7 @@ public class NeedFileDAOTest {
     @Test
     public void testCreateNeed() {
         // Setup
-        Need need = new Need("Wonder-Person", 100, 1000, "Toy");
+        Need need = new Need("Wonder-Person", 100, 1000, 1000, "Toy");
 
         // Invoke
         Need result = assertDoesNotThrow(() -> needFileDAO.createNeed(need),
@@ -95,7 +95,7 @@ public class NeedFileDAOTest {
     @Test
     public void testUpdateNeed() {
         // Setup
-        Need need = new Need("Nanapkins", 20, 400, "Sanitar");
+        Need need = new Need("Nanapkins", 20, 400, 1000, "Sanitar");
 
         // Invoke
         Need result = assertDoesNotThrow(() -> needFileDAO.updateNeed(need),
@@ -113,7 +113,7 @@ public class NeedFileDAOTest {
                 .when(mockObjectMapper)
                 .writeValue(any(File.class), any(Need[].class));
 
-        Need need = new Need("Wonder-Person", 100, 1000, "Toy");
+        Need need = new Need("Wonder-Person", 100, 1000, 1000, "Toy");
 
         assertThrows(IOException.class,
                 () -> needFileDAO.createNeed(need),
@@ -145,7 +145,7 @@ public class NeedFileDAOTest {
     @Test
     public void testUpdateNeedNotFound() {
         // Setup
-        Need need = new Need("Wipes", 35, 53, "Education");
+        Need need = new Need("Wipes", 35, 53, 1000, "Education");
 
         // Invoke
         Need result = assertDoesNotThrow(() -> needFileDAO.updateNeed(need),
