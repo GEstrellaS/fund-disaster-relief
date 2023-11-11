@@ -7,6 +7,12 @@ Content-Type: application/json
 {
     "name":"Chairs",
     "cost":0.0,
-    "quantity":87,
+    "currentQuantity":87,
     "type":"plastic"
 }
+
+###
+POST http://localhost:8080/cart/ansley/checkout
+
+###
+GET http://localhost:8080/needs/Chairs

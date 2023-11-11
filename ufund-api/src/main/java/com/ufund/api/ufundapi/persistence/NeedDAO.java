@@ -78,4 +78,6 @@ public interface NeedDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteNeed(String name) throws IOException;
+
+    public void modifyNeedQuantity(String name, int quantity) throws IOException;
 }

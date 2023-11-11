@@ -182,4 +182,16 @@ public class NeedFileDAO implements NeedDAO {
                 return false;
         }
     }
+
+    @Override
+    public void modifyNeedQuantity(String name, int quantity) throws IOException{
+        synchronized(needs) {
+            if (needs.containsKey(name)){
+                Need need = needs.get(name);
+                int overallQuantity = need.getCurrentQuantity() + quantity;
+                need.setCurrentQuantity(overallQuantity);
+                updateNeed(need); 
+            }
+        }
+    }
 }

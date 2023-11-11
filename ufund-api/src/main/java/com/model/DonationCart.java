@@ -40,7 +40,7 @@ public class DonationCart {
         this.donationCart.remove(item);
     }
 
-    public Need[] getDonationCart(){
+    public Need[] getItemsInDonationCart(){
         Need[] list = new Need[this.donationCart.size()];
         list = this.donationCart.toArray(list);
         return list;
