@@ -4,5 +4,4 @@ export interface Need {
     currentQuantity: number;  // Matches Java model
     requiredQuantity: number;  // Matches Java model
     type: string;
-    requiredquantity: number;
 }
