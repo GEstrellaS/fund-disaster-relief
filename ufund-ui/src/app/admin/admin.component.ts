@@ -15,7 +15,7 @@ import { MessageService } from '../message.service';
 export class AdminComponent implements OnInit {
   selectedNeed?: Need;
   needs: Need[] = [];
-  newNeed: Need = { name: '', price: 0, quantity: 0, type: '' };
+  newNeed: Need = { name: '', price: 0, quantity: 0, type: '' , requiredquantity:0};
 
   //needs:Need[] =NEEDS
   //hideDetails = false;
@@ -54,7 +54,7 @@ export class AdminComponent implements OnInit {
       this.needService.addNeed(newNeed).subscribe((addedNeed) => {
         // Handle the response from the backend, if needed
         console.log('Need added:', addedNeed);
-        this.newNeed = { name: '', price: 0, quantity: 0, type: '' };
+        this.newNeed = { name: '', price: 0, quantity: 0, type: '', requiredquantity: 0 };
         this.getNeeds();
       });
     }
