@@ -20,11 +20,13 @@
       <input id="price" [(ngModel)]="newNeed.cost" name="price" />
 
       <label for="quantity">Quantity:</label>
-      <input id="quantity" [(ngModel)]="newNeed.requiredQuantity" name="quantity" />
+      <input id="quantity" [(ngModel)]="newNeed.quantity" name="quantity" />   
+
+      <label for="requiredquantity ">Required Quantity:</label>
+      <input id="requiredquantity" [(ngModel)]="newNeed.requiredquantity" name="requiredquantity" />
 
       <label for="type">Type:</label>
       <input id="type" [(ngModel)]="newNeed.type" name="type" />
-
       <button type="submit">Submit</button>
     </form>
   </div>

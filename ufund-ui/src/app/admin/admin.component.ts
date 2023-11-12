@@ -14,7 +14,8 @@ import { NeedService } from '../need.service';
 export class AdminComponent implements OnInit {
   selectedNeed?: Need;
   needs: Need[] = [];
-  newNeed: Need = { name: '', cost: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
+
+  newNeed: Need = { name: '', cost: 0, currentQuantity: 0, requiredquantity: 0, type: ''};
 
   //needs:Need[] =NEEDS
   //hideDetails = false;
@@ -53,7 +54,9 @@ export class AdminComponent implements OnInit {
       this.needService.addNeed(newNeed).subscribe((addedNeed) => {
         // Handle the response from the backend, if needed
         console.log('Need added:', addedNeed);
-        this.newNeed = { name: '', cost: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
+
+        this.newNeed = { name: '', cost: 0, currentQuantity: 0, requiredquantity: 0, type: '' };
+
         this.getNeeds();
       });
     }
