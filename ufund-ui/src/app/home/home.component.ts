@@ -1,18 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
-import { NEEDS } from '../mock-needs';
-
+import { NeedService } from '../need.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  needs: Need[] = NEEDS;
+export class HomeComponent implements OnInit {
+  needs: Need[] = [];
   selectedNeed?: Need;
+
+  constructor(private needService: NeedService) {}
+
+  ngOnInit(): void {
+    this.getNeeds();
+  }
+
+  getNeeds(): void {
+    this.needService.getNeeds()
+        .subscribe(needs => this.needs = needs);
+  }
 
   onSelect(need: Need): void {
     this.selectedNeed = need;
-}
+  }
 }

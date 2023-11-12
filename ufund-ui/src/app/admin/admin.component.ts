@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Need } from '../need';
-//import { NEEDS } from '../mock-needs';
-import { NeedService } from '../need.service';
 import { MessageService } from '../message.service';
+import { Need } from '../need';
+import { NeedService } from '../need.service';
 
 
 
@@ -15,7 +14,8 @@ import { MessageService } from '../message.service';
 export class AdminComponent implements OnInit {
   selectedNeed?: Need;
   needs: Need[] = [];
-  newNeed: Need = { name: '', price: 0, quantity: 0, type: '' , requiredquantity:0};
+
+  newNeed: Need = { name: '', cost: 0, currentQuantity: 0, requiredquantity: 0, type: ''};
 
   //needs:Need[] =NEEDS
   //hideDetails = false;
@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
 
   onSelect(need: Need): void {
     this.selectedNeed = need;
-    this.messageService.add(`HeroesComponent: 
+    this.messageService.add(`AdminComponent: 
     Selected need name=${need.name}`);
     //this.hideDetails = false;
   }
@@ -54,7 +54,9 @@ export class AdminComponent implements OnInit {
       this.needService.addNeed(newNeed).subscribe((addedNeed) => {
         // Handle the response from the backend, if needed
         console.log('Need added:', addedNeed);
-        this.newNeed = { name: '', price: 0, quantity: 0, type: '', requiredquantity: 0 };
+
+        this.newNeed = { name: '', cost: 0, currentQuantity: 0, requiredquantity: 0, type: '' };
+
         this.getNeeds();
       });
     }
@@ -74,5 +76,3 @@ export class AdminComponent implements OnInit {
   //     });
   // }
 }
-  
-

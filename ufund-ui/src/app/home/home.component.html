@@ -21,16 +21,11 @@
 
 <div *ngIf="selectedNeed">
   <h2>{{selectedNeed.name | uppercase}} </h2>
-  <div>Price: {{selectedNeed.price}}</div>
-  <div>Quantity: {{selectedNeed.quantity}}</div>
+  <div>Price: {{selectedNeed.cost}}</div>
+  <p>Current Quantity: {{ selectedNeed.currentQuantity }}</p>
+  <p>Required Quantity: {{ selectedNeed.requiredQuantity }}</p>
   <div>Type: {{selectedNeed.type}}</div>
   <div class="input-group">
-    <!-- <label for="need-name">Need name: </label> -->
-    <!-- <input id="need-name" [(ngModel)]="selectedNeed.name" placeholder="Name"> -->
-    <!-- <label for="need-cost">Price: </label> -->
-    <!-- <input id="need-cost" [(ngModel)]="selectedNeed.price" placeholder="Price"> -->
-    <!-- <label for="need-quantity">Quantity: </label> -->
-    <!-- <input id="need-quantity" [(ngModel)]="selectedNeed.quantity" placeholder="Quantity"> -->
   </div>
 </div>
 
