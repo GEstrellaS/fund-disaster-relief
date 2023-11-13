@@ -1,5 +1,6 @@
 <div *ngIf="selectedNeed">
     <h2>{{selectedNeed.name | uppercase}} </h2>
+
     <div>Price: {{selectedNeed.price}}</div>
     <div>Current Quantity: {{selectedNeed.currentQuantity}}</div>
     <div>Required Quantity: {{selectedNeed.requiredQuantity}}</div>
@@ -8,11 +9,13 @@
       <label for="need-name">Need name: </label> 
       <input id="need-name" [(ngModel)]="selectedNeed.name" placeholder="Name">
       <label for="need-cost">Price: </label>
+
       <input id="need-cost" [(ngModel)]="selectedNeed.price" placeholder="Price">
       <label for="need-quantity">Current Quantity: </label>
       <input id="need-quantity" [(ngModel)]="selectedNeed.currentQuantity" placeholder="currentQuantity">
       <label for="need-quantity">Required Quantity: </label>
       <input id="need-quantity" [(ngModel)]="selectedNeed.requiredQuantity" placeholder="requiredQuantity">
+
       <label for="need-type">Type: </label>
       <input id="need-type" [(ngModel)]="selectedNeed.type" placeholder="Type">
     </div>

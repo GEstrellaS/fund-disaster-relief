@@ -4,6 +4,7 @@ import { CartService } from '../cart.service';
 import { UserService } from '../user.service';
 import { NeedService } from '../need.service'; // Import NeedService
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private needService: NeedService // Inject NeedService
   ) { }
+
 
   ngOnInit(): void {
     this.getNeeds();
@@ -45,5 +47,4 @@ export class HomeComponent implements OnInit {
     });
   }
 }
-
 
