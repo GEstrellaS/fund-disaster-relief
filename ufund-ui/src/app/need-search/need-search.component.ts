@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 import {
-   debounceTime, distinctUntilChanged, switchMap
+   debounceTime, distinctUntilChanged, startWith, switchMap
  } from 'rxjs/operators';
 
 
@@ -27,7 +27,10 @@ export class NeedSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.needs$ = this.needService.getNeeds();
+    
     this.needs$ = this.searchTerms.pipe(
+      startWith(''),
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => {

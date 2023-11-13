@@ -55,16 +55,17 @@ addNeed(need: Need): Observable<Need> {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-        console.error(error); // log to console instead
-        this.log(`${operation} failed: ${error.message}`);  
+  
+      console.error(error);
+  
+      this.log(`${operation} failed: ${error.message}`);  
       return of(result as T);
     };
   }
-  /** Log a NeedService message with the MessageService */
+  
   private log(message: string) {
     this.messageService.add(`NeedService: ${message}`);
 }
-
 searchNeeds(term: string): Observable<Need[]> {
   const searchTerm = term.toLowerCase().trim();
   if (!searchTerm) {
