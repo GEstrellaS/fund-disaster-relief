@@ -20,7 +20,6 @@ export class NeedService {
     private messageService: MessageService) { }
 
   getNeeds(): Observable<Need[]> {
-    // const needs = of(NEEDS);
     // this.messageService.add('NeedService: fetched needs');
     return this.http.get<Need[]>(this.needsUrl)
     .pipe(
@@ -30,8 +29,6 @@ export class NeedService {
   }
 
   getNeed(name: string): Observable<Need> {
-    // For now, assume that a need with the specified `id` always exists.
-    // Error handling will be added in the next step of the tutorial.
     const url = `${this.needsUrl}/${name}`;
      return this.http.get<Need>(url).pipe(
     tap(_ => this.log(`fetched need name=${name}`)),
@@ -39,14 +36,6 @@ export class NeedService {
   );
 
   }
-  
-  // updateNeed(need: Need): Observable<any> {
-  //   const url = `${this.needsUrl}/${need.name}`; 
-  //   return this.http.put(url, need, this.httpOptions).pipe(
-  //     tap(_ => this.log(`updated need id=${need.name}`)),
-  //     catchError(this.handleError<any>('updateNeed'))
-  //   );
-  // }
 
   updateNeed(need: Need): Observable<any> {
     return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
@@ -54,13 +43,7 @@ export class NeedService {
       catchError(this.handleError<any>('updateneed'))
     );
   }
-  /** POST: add a new need to the server */
-  // addNeed(need: Need): Observable<Need> {
-  //   return this.http.post<Need>(this.needsUrl, need, this.httpOptions).pipe(
-  //     tap((newNeed: Need) => this.log(`added need: ${newNeed.name}`)),
-  //     catchError(this.handleError<Need>('addNeed'))
-  // );
-//}
+  
 addNeed(need: Need): Observable<Need> {
   return this.http
     .post<Need>(this.needsUrl, need, this.httpOptions)
@@ -70,24 +53,33 @@ addNeed(need: Need): Observable<Need> {
     );
 }
 
-  
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-  
-      // Let the app keep running by returning an empty result.
+        console.error(error); // log to console instead
+        this.log(`${operation} failed: ${error.message}`);  
       return of(result as T);
     };
   }
-  
   /** Log a NeedService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`NeedService: ${message}`);
+}
+
+searchNeeds(term: string): Observable<Need[]> {
+  const searchTerm = term.toLowerCase().trim();
+  if (!searchTerm) {
+    return of([]);
+  }
+
+  return this.http.get<Need[]>(this.needsUrl).pipe(
+    map(needs => needs.filter(need => need.name.toLowerCase().includes(searchTerm))),
+    tap(filteredNeeds => {
+      const message = filteredNeeds.length > 0 ?
+        `found needs matching "${term}"` :
+        `no needs matching "${term}"`;
+      this.log(message);
+    }),
+    catchError(this.handleError<Need[]>('searchNeeds', []))
+  );
 }
 }

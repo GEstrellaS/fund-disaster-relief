@@ -10,8 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import { AdminComponent } from './admin/admin.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NeedDetailComponent } from './need-detail/need-detail.component';
-//import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { NeedSearchComponent } from './need-search/need-search.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +21,7 @@ import { InMemoryDataService } from './in-memory-data.service';
     AdminComponent,
     MessagesComponent,
     NeedDetailComponent,
+    NeedSearchComponent,
   ],
   imports: [
     BrowserModule,
