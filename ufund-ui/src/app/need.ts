@@ -1,6 +1,7 @@
 export interface Need {
     name: string;
     price: number;
-    quantity: number;
+    currentQuantity: number; 
+    requiredQuantity: number;
     type: string;
 }

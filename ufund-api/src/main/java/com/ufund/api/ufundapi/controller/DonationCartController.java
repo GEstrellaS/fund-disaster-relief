@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,6 +92,30 @@ public class DonationCartController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	@PutMapping("/{username}/increment")
+    public ResponseEntity<DonationCart> incrementItem(@PathVariable("username") String usernameString, @RequestBody Need need) {
+        LOG.info("PUT /cart/" + usernameString + "/increment/need");
+        try {
+            DonationCart cart = cartDao.incrementItemInDonationCart(usernameString, need);
+            return new ResponseEntity<>(cart, HttpStatus.OK);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{username}/decrement")
+    public ResponseEntity<DonationCart> decrementItem(@PathVariable("username") String usernameString, @RequestBody Need need) {
+        LOG.info("PUT /cart/" + usernameString + "/decrement/need");
+        try {
+            DonationCart cart = cartDao.decrementItemInDonationCart(usernameString, need);
+            return new ResponseEntity<>(cart, HttpStatus.OK);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
 

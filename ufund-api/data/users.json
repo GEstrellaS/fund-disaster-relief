@@ -1,1 +1,38 @@
-[{"username":"Aroy","password":"Aroy","isManager":false,"manager":false,"donationCart":{"donationCart":[]}},{"username":"admin","password":"admin","isManager":true,"manager":true,"donationCart":{"donationCart":[]}},{"username":"swen","password":"1234","isManager":false,"manager":false,"donationCart":{"donationCart":[]}},{"username":"user","password":"password","isManager":false,"manager":false,"donationCart":{"donationCart":[]}}]
+[
+    {
+        "username": "Aroy",
+        "password": "Aroy",
+        "isManager": false,
+        "manager": false,
+        "donationCart": {
+            "donationCart": []
+        }
+    },
+    {
+        "username": "admin",
+        "password": "admin",
+        "isManager": true,
+        "manager": true,
+        "donationCart": {
+            "donationCart": []
+        }
+    },
+    {
+        "username": "swen",
+        "password": "1234",
+        "isManager": false,
+        "manager": false,
+        "donationCart": {
+            "donationCart": []
+        }
+    },
+    {
+        "username": "user",
+        "password": "password",
+        "isManager": false,
+        "manager": false,
+        "donationCart": {
+            "donationCart": []
+        }
+    }
+]

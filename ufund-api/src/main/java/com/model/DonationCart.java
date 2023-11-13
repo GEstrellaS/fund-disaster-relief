@@ -1,6 +1,8 @@
 package com.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class DonationCart {
     private ArrayList<Need> donationCart;
@@ -36,9 +38,19 @@ public class DonationCart {
         }
     }
 
-    public void removeItem(Need item){
-        this.donationCart.remove(item);
+    public void removeItem(Need item) {
+        Iterator<Need> iterator = donationCart.iterator();
+        
+        while (iterator.hasNext()) {
+            Need cartItem = iterator.next();
+            if (cartItem.getName().equals(item.getName())) {
+                iterator.remove();
+                return;
+            }
+        }
     }
+    
+    
 
     public Need[] getItemsInDonationCart(){
         Need[] list = new Need[this.donationCart.size()];

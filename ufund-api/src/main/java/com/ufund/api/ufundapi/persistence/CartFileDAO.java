@@ -43,16 +43,19 @@ public class CartFileDAO implements CartDAO {
     @Override
     public DonationCart addItemToDonationCart(String username, Need need) throws IOException {
         DonationCart donationCart = getDonationCart(username);
-        if (donationCart == null){
+        if (donationCart == null) {
             donationCart = new DonationCart();
             usernameToCartMap.put(username, donationCart);
         }
-        if( need != null ){
+        if (need != null) {
+            // Set the quantity to 1 when adding the item
+            need.setCurrentQuantity(1);
             donationCart.addItem(need);
             save();
         }
-        return donationCart; 
+        return donationCart;
     }
+    
 
     @Override
     public DonationCart deleteItemFromDonationCart(String username, Need need) throws IOException {
@@ -67,6 +70,31 @@ public class CartFileDAO implements CartDAO {
         }
         return donationCart; 
     }
+
+    @Override
+    public DonationCart incrementItemInDonationCart(String username, Need need) throws IOException {
+        DonationCart donationCart = getDonationCart(username);
+        if (donationCart == null) {
+            donationCart = new DonationCart();
+            usernameToCartMap.put(username, donationCart);
+        }
+        if (need != null) {
+            donationCart.incrementItem(need, 1);
+            save();
+        }
+        return donationCart;
+    }
+
+    @Override
+    public DonationCart decrementItemInDonationCart(String username, Need need) throws IOException {
+    DonationCart donationCart = getDonationCart(username);
+    if (need != null) {
+        donationCart.decrementItem(need, 1);
+        save();
+    }
+    return donationCart;
+    }
+
 
     private void load() throws IOException{
         TypeReference<HashMap<String,DonationCart>> typeRef = new TypeReference<HashMap<String,DonationCart>>() {};
