@@ -12,5 +12,9 @@ public interface CartDAO {
     DonationCart addItemToDonationCart(String username, Need need) throws IOException;
 
     DonationCart deleteItemFromDonationCart(String username, Need need) throws IOException;
+
+    DonationCart incrementItemInDonationCart(String username, Need need) throws IOException;
+
+    DonationCart decrementItemInDonationCart(String username, Need need) throws IOException;
     
 }

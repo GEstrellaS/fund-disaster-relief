@@ -1,12 +1,27 @@
-GET http://localhost:8080/cart/ansley
+GET http://localhost:8080/cart/swen
 
 ###
-POST http://localhost:8080/cart/ansley/add/need
+POST http://localhost:8080/cart/swen/add/need
 Content-Type: application/json
 
 {
     "name":"Chairs",
     "cost":0.0,
-    "quantity":87,
+    "currentQuantity":87,
     "type":"plastic"
 }
+
+###
+POST http://localhost:8080/cart/ansley/checkout
+
+###
+GET http://localhost:8080/needs/Chairs
+
+###
+POST GET http://localhost:8080/cart/swen/delete/Chairs
+
+### 
+
+PUT http://localhost:8080/cart/swen/decrement/Chairs
+
+

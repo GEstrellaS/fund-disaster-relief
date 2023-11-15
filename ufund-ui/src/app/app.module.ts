@@ -12,6 +12,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { NeedDetailComponent } from './need-detail/need-detail.component';
 //import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { InMemoryDataService } from './in-memory-data.service';
     AdminComponent,
     MessagesComponent,
     NeedDetailComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
