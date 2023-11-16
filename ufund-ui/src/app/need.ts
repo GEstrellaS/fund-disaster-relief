@@ -1,6 +1,6 @@
 export interface Need {
     name: string;
-    price: number;
+    cost: number;
     currentQuantity: number; 
     requiredQuantity: number;
     type: string;

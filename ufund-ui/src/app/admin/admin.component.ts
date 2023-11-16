@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   selectedNeed?: Need;
   needs: Need[] = [];
 
-  newNeed: Need = { name: '', price: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
+  newNeed: Need = { name: '', cost: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
 
 
   //needs:Need[] =NEEDS
@@ -44,7 +44,7 @@ export class AdminComponent implements OnInit {
   }
     onSubmit(): void {
       // const name = form.value.name;
-      // const price = form.value.price;
+      // const cost = form.value.cost;
       // const quantity = form.value.quantity;
       // const type = form.value.type;
   
@@ -56,7 +56,7 @@ export class AdminComponent implements OnInit {
         // Handle the response from the backend, if needed
         console.log('Need added:', addedNeed);
 
-        this.newNeed = { name: '', price: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
+        this.newNeed = { name: '', cost: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
 
         this.getNeeds();
       });
@@ -65,11 +65,11 @@ export class AdminComponent implements OnInit {
     // You can implement validation and error handling here.
   
 
-  // add(name: string, price: number, quantity: number, type: string): void {
+  // add(name: string, cost: number, quantity: number, type: string): void {
   //   name = name.trim();
   //   if (!name) { return; }
 
-  //   const newNeed: Need = { name, price, quantity, type } as Need;
+  //   const newNeed: Need = { name, cost, quantity, type } as Need;
   
   //   this.needService.addNeed(newNeed)
   //     .subscribe(need => {

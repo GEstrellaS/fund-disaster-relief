@@ -1,16 +1,16 @@
 <div *ngIf="selectedNeed">
     <h2>{{selectedNeed.name | uppercase}} </h2>
 
-    <div>Price: {{selectedNeed.price}}</div>
+    <div>Cost: {{selectedNeed.cost}}</div>
     <div>Current Quantity: {{selectedNeed.currentQuantity}}</div>
     <div>Required Quantity: {{selectedNeed.requiredQuantity}}</div>
     <div>Type: {{selectedNeed.type}}</div>
     <div class="input-group">
       <label for="need-name">Need name: </label> 
       <input id="need-name" [(ngModel)]="selectedNeed.name" placeholder="Name">
-      <label for="need-cost">Price: </label>
+      <label for="need-cost">Cost: </label>
 
-      <input id="need-cost" [(ngModel)]="selectedNeed.price" placeholder="Price">
+      <input id="need-cost" [(ngModel)]="selectedNeed.cost" placeholder="Cost">
       <label for="need-quantity">Current Quantity: </label>
       <input id="need-quantity" [(ngModel)]="selectedNeed.currentQuantity" placeholder="currentQuantity">
       <label for="need-quantity">Required Quantity: </label>
