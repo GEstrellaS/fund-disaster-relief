@@ -56,7 +56,7 @@ Users can navigate between the Login, Browse, and Donation Cart pages at any tim
 
 Admin Features:
 The admin can view the inventory, search for specific goods, and add new goods listings on their browse page.
-Clicking on a specific product listing redirects the admin to the good's detail page, where they can update its price and quantity.
+Clicking on a specific product listing redirects the admin to the good's detail page, where they can update its cost and quantity.
 
 ### Definition of MVP
 The minimum viable product includes:

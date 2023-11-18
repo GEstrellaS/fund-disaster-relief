@@ -6,17 +6,18 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
             "name": "UfundApiApplication",
             "request": "launch",
             "mainClass": "com.ufund.api.ufundapi.UfundApiApplication",
-            "projectName": "ufund-api", 
-            "cwd":"${workspaceFolder}/ufund-api"
+            "projectName": "ufund-api",
+            "cwd": "${workspaceFolder}/ufund-api"
+        },
+        {
+            "type": "msedge",
+            "request": "launch",
+            "name": "Launch Edge against localhost",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/ufund-ui"
         }
     ]
 }
