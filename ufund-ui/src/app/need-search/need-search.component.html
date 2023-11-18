@@ -1,0 +1,18 @@
+<div id="search-component">
+    <label for="search-box">Need Search</label>
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+    <h2>Cupboard</h2>
+    <ul class="search-result">
+      <div *ngFor="let need of needs$ | async" class="need-box"> 
+        <a routerLink="/detail/{{need.name}}">
+          <span class="need">{{need.name}}</span>
+        </a>
+        <p>Name: {{need.name}}</p>
+        <p>Price: {{need.cost}}</p>
+        <p>Current Quantity Donated: {{need.currentQuantity}}</p>
+        <p>Required Quantity Donated: {{need.requiredQuantity}}</p>
+        <p>Type: {{need.type}}</p>
+      </div>
+      </ul>
+  </div> 
+

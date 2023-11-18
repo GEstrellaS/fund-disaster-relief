@@ -22,3 +22,15 @@ label {
     color: #ccc;
     cursor: auto;
   }
+
+  .search-results {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+  }
+  
+  .need-box {
+    width: 20%;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
