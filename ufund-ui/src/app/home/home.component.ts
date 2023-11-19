@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
 
   getNeeds(): void {
     this.needService.getNeeds().subscribe(needs => {
-      this.needs = needs;
+      this.needs = needs.filter(need => need.currentQuantity !== need.requiredQuantity);
     });
   }
 }

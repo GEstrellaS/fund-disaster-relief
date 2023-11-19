@@ -17,10 +17,6 @@ export class AdminComponent implements OnInit {
 
   newNeed: Need = { name: '', cost: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
 
-
-  //needs:Need[] =NEEDS
-  //hideDetails = false;
-
   constructor(private needService: NeedService, 
     private messageService: MessageService) {}
 
@@ -32,48 +28,33 @@ export class AdminComponent implements OnInit {
     this.selectedNeed = need;
     this.messageService.add(`AdminComponent: 
     Selected need name=${need.name}`);
-    //this.hideDetails = false;
   }
 
-  // toggleHideDetails() {
-  //   this.hideDetails = !this.hideDetails;
-  // }
   getNeeds(): void {
     this.needService.getNeeds()
         .subscribe(needs => this.needs = needs);
   }
-    onSubmit(): void {
-      // const name = form.value.name;
-      // const cost = form.value.cost;
-      // const quantity = form.value.quantity;
-      // const type = form.value.type;
-  
-      // Create a Need object with the form values
+
+  onSubmit(): void {
+    if (this.isNewNeedValid()) {
       const newNeed: Need = { ...this.newNeed };
-  
-      // Call the service method to add the need
       this.needService.addNeed(newNeed).subscribe((addedNeed) => {
-        // Handle the response from the backend, if needed
-        console.log('Need added:', addedNeed);
+      console.log('Need added:', addedNeed);
+      this.newNeed = { name: '', cost: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
 
-        this.newNeed = { name: '', cost: 0, currentQuantity: 0, requiredQuantity: 0, type: '' };
-
-        this.getNeeds();
+      this.getNeeds();
       });
-    }
+    }else {
+    console.log('Invalid new need. Please make sure all values are non-negative.');
+   }
+  }
   
-    // You can implement validation and error handling here.
-  
+  isNewNeedValid(): boolean {
+    return (
+      this.newNeed.cost >= 0 &&
+      this.newNeed.currentQuantity >= 0 &&
+      this.newNeed.requiredQuantity >= 0 && this.newNeed.requiredQuantity > this.newNeed.currentQuantity
+    );
+  }
 
-  // add(name: string, cost: number, quantity: number, type: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-
-  //   const newNeed: Need = { name, cost, quantity, type } as Need;
-  
-  //   this.needService.addNeed(newNeed)
-  //     .subscribe(need => {
-  //       this.needs.push(need);
-  //     });
-  // }
 }

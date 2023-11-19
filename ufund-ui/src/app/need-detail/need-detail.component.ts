@@ -41,9 +41,16 @@ toggleHideDetails() {
   this.hideDetails = !this.hideDetails;
 }
 save(): void {
-  if (this.selectedNeed) {
+  if (this.selectedNeed && this.isNeedValid()) {
     this.needService.updateNeed(this.selectedNeed)
       .subscribe(() => this.goBack());
   }
+}
+isNeedValid(): boolean {
+  return (
+    this.selectedNeed?.cost !== undefined && this.selectedNeed.cost >= 0 &&
+    this.selectedNeed?.currentQuantity !== undefined && this.selectedNeed.currentQuantity >= 0 &&
+    this.selectedNeed?.requiredQuantity !== undefined && this.selectedNeed.requiredQuantity >= 0
+  );
 }
 }
