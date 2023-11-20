@@ -22,6 +22,7 @@
     <p>No Announcements :(</p>
   </ng-template>
 </div>
+<br><br>
 
 <div id="search-component">
   <div class="topnav">
@@ -29,7 +30,7 @@
 </div>
   <h2>Cupboard</h2>
   <ul class="search-result">
-    <div *ngFor="let need of needs$ | async" class="need-box"> 
+    <div *ngFor="let need of needs$ | async" class="need-box">
       <p>Name: {{need.name}}</p>
       <p>Price: ${{need.cost}}</p>
       <p>Current Quantity Donated: {{need.currentQuantity}}</p>
