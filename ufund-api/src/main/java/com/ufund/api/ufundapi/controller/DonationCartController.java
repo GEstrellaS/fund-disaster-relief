@@ -56,8 +56,9 @@ public class DonationCartController {
 				need.setType(globalNeed.getType());
 				DonationCart cart = cartDao.addItemToDonationCart(usernameString, need);
 				return new ResponseEntity<DonationCart>(cart, HttpStatus.OK);
+			}else{
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (IOException e) {
 			LOG.log(Level.SEVERE, e.getLocalizedMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
