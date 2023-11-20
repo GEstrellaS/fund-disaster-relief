@@ -29,10 +29,10 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getNeeds();
+    //this.getNeeds();
     this.getAnnouncements();
 
-    //this.needs$ = this.needService.getNeeds();
+    this.needs$ = this.needService.getFilteredNeeds();
     
     this.needs$ = this.searchTerms.pipe(
       startWith(''),
@@ -41,10 +41,10 @@ export class HomeComponent implements OnInit {
       switchMap((term: string) => {
         if (term.trim() === '') {
 
-          return this.needService.getNeeds();
+          return this.needService.getFilteredNeeds();
         } else {
 
-          return this.needService.searchNeeds(term);
+          return this.needService.searchRequiredNeeds(term);
         }
       }),
     );
@@ -68,9 +68,9 @@ export class HomeComponent implements OnInit {
 
   getNeeds(): void {
     this.needService.getNeeds().subscribe(needs => {
-      this.needs = needs.filter(need => need.currentQuantity !== need.requiredQuantity);
+      this.needs = needs.filter(need => need.currentQuantity < need.requiredQuantity);
     });
-  }
+}
 
   getAnnouncements(): void {
     this.announcementService.getAnnouncements().subscribe(announcements => {

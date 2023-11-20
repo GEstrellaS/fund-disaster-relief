@@ -39,7 +39,7 @@ export class NeedSearchComponent implements OnInit {
           return this.needService.getNeeds();
         } else {
 
-          return this.needService.searchNeeds(term);
+          return this.needService.searchAllNeeds(term);
         }
       }),
     );
