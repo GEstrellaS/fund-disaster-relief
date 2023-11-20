@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { NeedService } from '../need.service'; // Import NeedService
 import { Announcement } from '../announcement';
 import { AnnouncementsService } from '../announcements.service';
+import { Observable, Subject, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class HomeComponent implements OnInit {
   needs: Need[] = [];
   announcements: Announcement[] = [];
   selectedNeed?: Need;
+  needs$!: Observable<Need[]>;
+  private searchTerms = new Subject<string>();
 
   constructor(
     private cartService: CartService,
@@ -28,6 +31,23 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getNeeds();
     this.getAnnouncements();
+
+    //this.needs$ = this.needService.getNeeds();
+    
+    this.needs$ = this.searchTerms.pipe(
+      startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => {
+        if (term.trim() === '') {
+
+          return this.needService.getNeeds();
+        } else {
+
+          return this.needService.searchNeeds(term);
+        }
+      }),
+    );
   }
 
   onSelect(need: Need): void {
@@ -56,6 +76,9 @@ export class HomeComponent implements OnInit {
     this.announcementService.getAnnouncements().subscribe(announcements => {
       this.announcements = announcements.filter(announcement => announcement.id);
     });
+  }
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 }
 

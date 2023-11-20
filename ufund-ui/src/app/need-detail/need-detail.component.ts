@@ -46,6 +46,13 @@ save(): void {
       .subscribe(() => this.goBack());
   }
 }
+
+delete(): void {
+  if (this.selectedNeed && confirm('Are you sure you want to delete this need?')) {
+      this.needService.deleteNeed(this.selectedNeed).subscribe(() => this.goBack());
+  }
+}
+
 isNeedValid(): boolean {
   return (
     this.selectedNeed?.cost !== undefined && this.selectedNeed.cost >= 0 &&

@@ -55,6 +55,15 @@ addNeed(need: Need): Observable<Need> {
     );
 }
 
+deleteNeed(need: Need): Observable<any> {
+  const url = `${this.needsUrl}/${need.name}`;
+
+  return this.http.delete(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted need name=${need.name}`)),
+      catchError(this.handleError<any>('deleteNeed'))
+  );
+}
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
