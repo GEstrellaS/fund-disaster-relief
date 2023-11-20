@@ -1,0 +1,14 @@
+<h2>Announcements!</h2>
+<div class="announcements">
+  <div *ngFor="let announcement of announcements" class="announcement-box">
+    <button (click)="deleteAnnouncement(announcement.id)" class="delete-button">Delete</button>
+    <div class="arrow">&#8594;</div>
+    <h3 class="detail">{{announcement.detail}}</h3>
+  </div>
+</div>
+
+<div>
+    <label for="announcementText">New Announcement:</label>
+    <input id="announcementText" [(ngModel)]="announcementText" />
+    <button (click)="createAnnouncement()">Add Announcement</button>
+  </div>

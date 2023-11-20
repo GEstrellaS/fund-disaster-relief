@@ -30,34 +30,22 @@ public class AnnouncementControllerTest {
 
     @Test
     public void testCreateAnnouncement() throws IOException{
-        Announcement announcement = new Announcement("Announcement");
+        String announcement = "Announcement";
 
         when(mockAnnouncementDAO.createAnnouncement(announcement)).thenReturn(announcement);
 
-        ResponseEntity<Announcement> response = announcementController.createAnnouncement(announcement);
+        ResponseEntity<String> response = announcementController.createAnnouncement(announcement);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(announcement, response.getBody());
     }
 
     @Test
-    public void testCreateAnnouncementFail() throws IOException{
-        Announcement announcement = new Announcement("Announcement");
-
-        when(mockAnnouncementDAO.createAnnouncement(announcement)).thenReturn(null);
-
-        ResponseEntity<Announcement> response = announcementController.createAnnouncement(null);
-
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        assertEquals(null, response.getBody());
-    }
-
-    @Test
     public void testCreateAnnouncementException() throws IOException{
-        Announcement announcement = new Announcement("Announcement");
+        String announcement = "Announcement";
         doThrow(new IOException()).when(mockAnnouncementDAO).createAnnouncement(announcement);
 
-        ResponseEntity<Announcement> response = announcementController.createAnnouncement(announcement);
+        ResponseEntity<String> response = announcementController.createAnnouncement(announcement);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals(null, response.getBody());

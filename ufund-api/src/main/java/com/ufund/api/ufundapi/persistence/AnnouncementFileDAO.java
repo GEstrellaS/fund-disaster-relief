@@ -98,10 +98,10 @@ public class AnnouncementFileDAO implements AnnouncementDAO{
     ** {@inheritDoc}
      */
     @Override
-    public Announcement createAnnouncement(Announcement announcement) throws IOException {
+    public Announcement createAnnouncement(String announcement) throws IOException {
         synchronized(announcements){
-            Announcement newAnnouncement = new Announcement(announcement.getDetail());
-            announcements.put(announcement.getID(), newAnnouncement);
+            Announcement newAnnouncement = new Announcement(announcement);
+            announcements.put(newAnnouncement.getID(), newAnnouncement);
             save();
             return newAnnouncement;
         }

@@ -7,6 +7,7 @@ import { ShoppingCartComponent } from './shoppingcart/shoppingcart.component';
 import { AdminComponent } from './admin/admin.component';
 import { NeedDetailComponent } from './need-detail/need-detail.component';
 import { AboutComponent } from './about/about.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'cart', component: ShoppingCartComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'admin/announcement', component: AnnouncementComponent},
   { path: 'detail/:name', component: NeedDetailComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

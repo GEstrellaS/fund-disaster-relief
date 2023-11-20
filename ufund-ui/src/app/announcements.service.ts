@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AnnouncementsService {
-  private needsUrl = 'http://localhost:8080/announcements'
+  private announcementUrl = 'http://localhost:8080/announcements'
   httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -31,19 +31,31 @@ export class AnnouncementsService {
     }
 
     getAnnouncements(): Observable<Announcement[]> {
-      return this.http.get<Announcement[]>(this.needsUrl)
+      return this.http.get<Announcement[]>(this.announcementUrl)
       .pipe(
         tap(_ => this.log('fetched announcements')),
         catchError(this.handleError<Announcement[]>('getAnnouncements', []))
       );
     }
 
-    addAnnouncement(announcement: Announcement): Observable<Announcement> {
+    addAnnouncement(announcement: string): Observable<Announcement> {
       return this.http
-        .post<Announcement>(this.needsUrl, announcement, this.httpOptions)
+        .post<Announcement>(this.announcementUrl, announcement, this.httpOptions)
         .pipe(
-          tap((newAnnouncement: Announcement) => console.log(`added announcement: ${newAnnouncement.detail}`)),
+          tap((newAnnouncement: Announcement) => {
+            console.log(`Added announcement: ${newAnnouncement}`);
+          }),
           catchError(this.handleError<Announcement>('addAnnouncement'))
+        );
+    }
+
+    deleteAnnouncement(id: number): Observable<any> {
+      const url = `${this.announcementUrl}/${id}`;
+    
+      return this.http.delete(url, this.httpOptions)
+        .pipe(
+          tap(_ => console.log(`deleted announcement with id=${id}`)),
+          catchError(this.handleError<any>('deleteAnnouncement'))
         );
     }
 }

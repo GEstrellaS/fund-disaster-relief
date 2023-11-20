@@ -15,6 +15,7 @@ import { NeedSearchComponent } from './need-search/need-search.component';
 
 //import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AboutComponent } from './about/about.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AboutComponent } from './about/about.component';
     NeedDetailComponent,
     NeedSearchComponent,
     AboutComponent,
+    AnnouncementComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,8 @@
+.announcement-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  .arrow {
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
