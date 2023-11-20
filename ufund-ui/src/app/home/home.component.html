@@ -8,7 +8,6 @@
   <a routerLink="/about">About</a>
   <a routerLink="/cart">Cart</a>
   <a href="#contact">Log Out</a>
-  <input type="text" class="search-box" placeholder="Search...">
 </div>
 
 <h2>Announcements!</h2>
@@ -24,20 +23,21 @@
   </ng-template>
 </div>
 
-
-<h2>Cupboard</h2>
-<div class="needs">
-  <div *ngFor="let need of needs" class="need-box">
-    <!-- Display need details -->
-    <h3 class="name">{{need.name}}</h3>
-    <p>Cost: ${{need.cost}}</p>
-    <p>Current Quantity Donated: {{need.currentQuantity}}</p>
-    <p>Required Quantity Donated: {{need.requiredQuantity}}</p>
-    <p>Type: {{need.type}}</p>
-    <!-- Add to Cart button -->
-    <button (click)="addToCart(need)">Add to Cart</button>
-  </div>
+<div id="search-component">
+  <div class="topnav">
+  <input type="text" class="search-box" #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Search..."/>
 </div>
-
+  <h2>Cupboard</h2>
+  <ul class="search-result">
+    <div *ngFor="let need of needs$ | async" class="need-box"> 
+      <p>Name: {{need.name}}</p>
+      <p>Price: ${{need.cost}}</p>
+      <p>Current Quantity Donated: {{need.currentQuantity}}</p>
+      <p>Required Quantity Donated: {{need.requiredQuantity}}</p>
+      <p>Type: {{need.type}}</p>
+      <button (click)="addToCart(need)">Add to Cart</button>
+    </div>
+  </ul>
+</div>
 
 
