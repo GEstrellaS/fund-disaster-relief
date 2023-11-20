@@ -67,7 +67,7 @@ body {
 .search-container {
   display: flex;
   align-items: center;
-  background-color: #000000; /* Same as topnav */
+  background-color: #000000;
 }
 
 /* Search Box Styles */
@@ -95,13 +95,6 @@ body {
 .search-button:hover {
   background-color: #0056b3;
   box-shadow: 0 2px 4px rgba(232, 224, 224, 0.3);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .topnav a, .search-box, .search-button {
-    padding: 10px;
-  }
 }
 
 /* Needs Section Styles */
