@@ -25,7 +25,6 @@ public class NeedController {
     private static final Logger LOG = Logger.getLogger(NeedController.class.getName());
     private NeedDAO needDao;
 
-    
     public NeedController(NeedDAO needDao) {
         this.needDao = needDao;
     }

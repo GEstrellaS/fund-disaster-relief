@@ -32,5 +32,5 @@ public interface AnnouncementDAO {
      * false if announcement with the given id does not exist
      * @throws IOException
      */
-    boolean deleteNeed(int id) throws IOException;
+    boolean deleteAnnouncement(int id) throws IOException;
 }
