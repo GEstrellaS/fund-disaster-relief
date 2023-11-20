@@ -34,6 +34,8 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/login")
+
+    
 	public ResponseEntity<Users> loginUser(@RequestParam("username") String username, @RequestParam("password") String password){
 		LOG.info("GET /users/login?username=" + username + "&password=" + password);
 		Users user = userDAO.login(username, password);
