@@ -28,18 +28,13 @@ public class AnnouncementController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Announcement[]> getAnnouncement() {
+    public ResponseEntity<Announcement[]> getAnnouncements() {
         LOG.info("GET /announcement");
 
         try {
             Announcement[] announcement = announcementDAO.getAnnouncements();
-            if (announcement!= null){
-                return new ResponseEntity<>(announcement,HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }
-        catch(IOException e) {
+            return new ResponseEntity<>(announcement,HttpStatus.OK);
+        }catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.model.Announcement;
-import com.model.Need;
 
 /**
  * Implements the functionality for JSON file-based persistance for Announcements
