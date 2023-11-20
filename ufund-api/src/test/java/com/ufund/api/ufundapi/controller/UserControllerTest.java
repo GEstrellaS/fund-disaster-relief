@@ -29,7 +29,7 @@ import org.junit.platform.engine.reporting.ReportEntry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-
+@Tag("Controller-tier")
 public class UserControllerTest {
     private UserController userController;
     private UserDAO mockUserDAO;

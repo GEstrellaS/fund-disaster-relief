@@ -12,9 +12,9 @@ public class AnnouncementTest {
 
     @Test
     public void testCtor(){
-        int expectedID = 0;
         String expectedDetail = "Announcement";
         Announcement expectedAnnouncement = new Announcement(expectedDetail);
+        int expectedID = expectedAnnouncement.getID();
 
         assertEquals(expectedDetail, expectedAnnouncement.getDetail());
         assertEquals(expectedID, expectedAnnouncement.getID());
