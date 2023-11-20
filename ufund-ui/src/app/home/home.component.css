@@ -18,33 +18,36 @@ body {
   margin: 0;
 }
 
-.header-button {
+/* Button Styles */
+.header-button, .needs button {
   background-color: #0069D9;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.header-button:hover {
+.header-button:hover, .needs button:hover {
   background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 /* Top Navigation Styles */
 .topnav {
   overflow: hidden;
   background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .topnav a {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  color: white;
   transition: background-color 0.3s;
 }
 
@@ -55,41 +58,29 @@ body {
 
 .topnav a.active {
   background-color: #4CAF50;
-  color: white;
 }
 
 .search-box {
-  float: right;
   padding: 10px;
   border: none;
-  margin-top: 8px;
-  margin-right: 16px;
   font-size: 17px;
 }
 
-/* Styling for the Needs Section */
+/* Needs Section Styles */
 .needs {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  gap: 20px;
 }
 
 .need-box {
   border: 1px solid #ddd;
-  padding: 15px;
-  margin: 10px;
-  width: 200px; /* Adjust the width as needed */
+  padding: 20px;
+  width: 200px;
   box-sizing: border-box;
-}
-
-.needs button {
-  background-color: #fff;
-  color: #333;
-  border: 1px solid #ddd;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .needs button.selected {
@@ -98,29 +89,38 @@ body {
   border-color: #4cae4c;
 }
 
-.needs button:hover {
-  background-color: #e6e6e6;
-}
-
 .needs .name {
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .topnav a, .search-box {
+    padding: 10px;
+  }
 
-/* Styles for the Selected Need Details */
-.selectedNeed {
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-top: 20px;
+  .needs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .need-box {
+    width: auto;
+  }
 }
 
+/* Announcement Box Styles */
 .announcement-box {
   display: flex;
   align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .arrow {
-  margin-right: 10px; /* Adjust the margin as needed */
+  margin-right: 10px;
 }
