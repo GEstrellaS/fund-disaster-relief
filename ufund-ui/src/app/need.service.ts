@@ -20,12 +20,20 @@ export class NeedService {
     private messageService: MessageService) { }
 
   getNeeds(): Observable<Need[]> {
- 
     return this.http.get<Need[]>(this.needsUrl)
     .pipe(
       tap(_ => this.log('fetched needs')),
       catchError(this.handleError<Need[]>('getNeeds', []))
     );
+  }
+
+  getFilteredNeeds(): Observable<Need[]> {
+    return this.http.get<Need[]>(this.needsUrl)
+      .pipe(
+        map(needs => needs.filter(need => need.currentQuantity < need.requiredQuantity)),
+        tap(_ => this.log('fetched needs')),
+        catchError(this.handleError<Need[]>('getNeeds', []))
+      );
   }
 
   getNeed(name: string): Observable<Need> {
@@ -82,7 +90,7 @@ deleteNeed(need: Need): Observable<any> {
   private log(message: string) {
     this.messageService.add(`NeedService: ${message}`);
 }
-searchNeeds(term: string): Observable<Need[]> {
+searchAllNeeds(term: string): Observable<Need[]> {
   const searchTerm = term.toLowerCase().trim();
   if (!searchTerm) {
     return of([]);
@@ -90,6 +98,27 @@ searchNeeds(term: string): Observable<Need[]> {
 
   return this.http.get<Need[]>(this.needsUrl).pipe(
     map(needs => needs.filter(need => need.name.toLowerCase().includes(searchTerm))),
+    tap(filteredNeeds => {
+      const message = filteredNeeds.length > 0 ?
+        `found needs matching "${term}"` :
+        `no needs matching "${term}"`;
+      this.log(message);
+    }),
+    catchError(this.handleError<Need[]>('searchNeeds', []))
+  );
+}
+
+searchRequiredNeeds(term: string): Observable<Need[]> {
+  const searchTerm = term.toLowerCase().trim();
+  if (!searchTerm) {
+    return of([]);
+  }
+
+  return this.http.get<Need[]>(this.needsUrl).pipe(
+    map(needs => needs.filter(
+      need => need.name.toLowerCase().includes(searchTerm) &&
+              need.currentQuantity < need.requiredQuantity 
+    )),
     tap(filteredNeeds => {
       const message = filteredNeeds.length > 0 ?
         `found needs matching "${term}"` :
