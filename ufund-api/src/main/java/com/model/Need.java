@@ -17,6 +17,10 @@ public class Need {
 
     /**
      * Need constructor
+     * @param name
+     * @param cost
+     * @param quantity
+     * @param type
      */
     public Need(@JsonProperty("name") String name, @JsonProperty("cost") double cost, @JsonProperty("currentQuantity") int currentQuantity, @JsonProperty("requiredQuantity") int requiredQuantity, @JsonProperty("type") String type){
         this.name = name;

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import com.model.Need;
 
 /**
- * Implements the functionality for JSON file-based peristance for Heroes
+ * Implements the functionality for JSON file-based peristance for Needs
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed

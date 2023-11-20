@@ -25,11 +25,9 @@ public class NeedController {
     private static final Logger LOG = Logger.getLogger(NeedController.class.getName());
     private NeedDAO needDao;
 
-    
     public NeedController(NeedDAO needDao) {
         this.needDao = needDao;
     }
-
 
     @GetMapping("/{name}")
     public ResponseEntity<Need> getNeed(@PathVariable String name) {
@@ -40,8 +38,7 @@ public class NeedController {
                 return new ResponseEntity<Need>(need,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch(IOException e) {
+        }catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -58,8 +55,7 @@ public class NeedController {
                 return new ResponseEntity<Need[]>(need,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch(IOException e) {
+        }catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -74,8 +70,7 @@ public class NeedController {
                 return new ResponseEntity<Need[]>(needs,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        catch(IOException e) {
+        }catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -93,9 +88,9 @@ public class NeedController {
                 }
             }
             
-            Need newneed = needDao.createNeed(need);
-            if (newneed != null) {
-                return new ResponseEntity<>(newneed, HttpStatus.CREATED);
+            Need newNeed = needDao.createNeed(need);
+            if (newNeed != null) {
+                return new ResponseEntity<>(newNeed, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -104,7 +99,6 @@ public class NeedController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     /**
      * Updates the {@linkplain Need Need} with the provided {@linkplain Need need} object, if it exists
@@ -118,7 +112,6 @@ public class NeedController {
     @PutMapping("")
     public ResponseEntity<Need> updateNeed(@RequestBody Need incomingNeed) {
         LOG.info("PUT /needs " + incomingNeed);
-    
         try {
             String needName = incomingNeed.getName();
             Need existingNeed = needDao.getNeed(needName);
@@ -147,7 +140,6 @@ public class NeedController {
         }
     }
     
-
     @DeleteMapping("/{name}")
     public ResponseEntity<Need> deleteNeed(@PathVariable String name) {
         LOG.info("DELETE /needs/" + name);
@@ -169,7 +161,7 @@ public class NeedController {
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-            
+        }  
     }
+
 }
