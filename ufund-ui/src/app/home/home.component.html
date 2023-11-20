@@ -11,6 +11,20 @@
   <input type="text" class="search-box" placeholder="Search...">
 </div>
 
+<h2>Announcements!</h2>
+<div class="announcements">
+  <ng-container *ngIf="announcements.length > 0; else noAnnouncements">
+    <div *ngFor="let announcement of announcements" class="announcement-box">
+      <div class="arrow">&#8594;</div>
+      <h3 class="detail">{{announcement.detail}}</h3>
+    </div>
+  </ng-container>
+  <ng-template #noAnnouncements>
+    <p>No Announcements :(</p>
+  </ng-template>
+</div>
+
+
 <h2>Cupboard</h2>
 <div class="needs">
   <div *ngFor="let need of needs" class="need-box">
