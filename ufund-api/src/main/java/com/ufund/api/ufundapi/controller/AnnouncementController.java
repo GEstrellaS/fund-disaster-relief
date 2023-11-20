@@ -41,15 +41,11 @@ public class AnnouncementController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Announcement> createAnnouncement(@RequestBody Announcement announcement) {
-        LOG.info("POST /announcements " + announcement);
+    public ResponseEntity<String> createAnnouncement(@RequestBody String announcement) {
+        LOG.info("POST /announcements?detail=" + announcement+ "");
         try {
             Announcement newAnnouncement = announcementDAO.createAnnouncement(announcement);
-            if (newAnnouncement != null) {
-                return new ResponseEntity<>(newAnnouncement, HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return new ResponseEntity<>(newAnnouncement.toString(), HttpStatus.CREATED);
         } catch (IOException e){
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

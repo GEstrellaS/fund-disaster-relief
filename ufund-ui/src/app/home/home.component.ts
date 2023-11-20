@@ -3,6 +3,8 @@ import { Need } from '../need';
 import { CartService } from '../cart.service';
 import { UserService } from '../user.service';
 import { NeedService } from '../need.service'; // Import NeedService
+import { Announcement } from '../announcement';
+import { AnnouncementsService } from '../announcements.service';
 
 
 @Component({
@@ -12,17 +14,20 @@ import { NeedService } from '../need.service'; // Import NeedService
 })
 export class HomeComponent implements OnInit {
   needs: Need[] = [];
+  announcements: Announcement[] = [];
   selectedNeed?: Need;
 
   constructor(
     private cartService: CartService,
     private userService: UserService,
+    private announcementService: AnnouncementsService,
     private needService: NeedService // Inject NeedService
   ) { }
 
 
   ngOnInit(): void {
     this.getNeeds();
+    this.getAnnouncements();
   }
 
   onSelect(need: Need): void {
@@ -44,6 +49,12 @@ export class HomeComponent implements OnInit {
   getNeeds(): void {
     this.needService.getNeeds().subscribe(needs => {
       this.needs = needs.filter(need => need.currentQuantity !== need.requiredQuantity);
+    });
+  }
+
+  getAnnouncements(): void {
+    this.announcementService.getAnnouncements().subscribe(announcements => {
+      this.announcements = announcements.filter(announcement => announcement.id);
     });
   }
 }

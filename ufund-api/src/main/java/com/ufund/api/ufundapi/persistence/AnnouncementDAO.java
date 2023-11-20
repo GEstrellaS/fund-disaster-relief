@@ -22,7 +22,7 @@ public interface AnnouncementDAO {
      * @return new {@link Announcement announcement} if succesful, false otherwise
      * @throws IOException if an issue with underlying storage
      */
-    Announcement createAnnouncement(Announcement announcement) throws IOException;
+    Announcement createAnnouncement(String announcement) throws IOException;
 
     /**
      * Deletes a {@linkplain Announcement announcement} with the given id
