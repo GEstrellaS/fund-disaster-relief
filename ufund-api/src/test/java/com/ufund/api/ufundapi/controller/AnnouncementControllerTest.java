@@ -30,14 +30,14 @@ public class AnnouncementControllerTest {
 
     @Test
     public void testCreateAnnouncement() throws IOException{
-        String announcement = "Announcement";
+        Announcement announcement = new Announcement("Announcement");
 
-        when(mockAnnouncementDAO.createAnnouncement(announcement)).thenReturn(announcement);
+        when(mockAnnouncementDAO.createAnnouncement("Announcement")).thenReturn(announcement);
 
-        ResponseEntity<String> response = announcementController.createAnnouncement(announcement);
+        ResponseEntity<String> response = announcementController.createAnnouncement("Announcement");
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(announcement, response.getBody());
+        assertEquals(announcement.toString(), response.getBody());
     }
 
     @Test
