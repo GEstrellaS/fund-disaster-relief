@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Announcement{
     private static final Logger LOG = Logger.getLogger(Announcement.class.getName());
     public final static String STRING_FORMAT = "Announcement [id=%d, detail=%s]";
-    private static int classID = 0;
+    private static int classID = 1;
     @JsonProperty("id") private int id;
     @JsonProperty("detail") private String detail;
 
