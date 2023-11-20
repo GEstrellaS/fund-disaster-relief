@@ -67,41 +67,32 @@ public class NeedFileDAOTest {
 
     @Test
     public void testDeleteNeed() {
-        // Invoke
         boolean result = assertDoesNotThrow(() -> needFileDAO.deleteNeed("Bananas"),
                 "Unexpected exception thrown");
 
-        // Analzye
         assertEquals(result, true);
         assertEquals(needFileDAO.needs.size(), testNeeds.length - 1);
     }
 
     @Test
     public void testCreateNeed() {
-        // Setup
         Need need = new Need("Wonder-Person", 100, 1000, 1000, "Toy");
 
-        // Invoke
         Need result = assertDoesNotThrow(() -> needFileDAO.createNeed(need),
                 "Unexpected exception thrown");
 
-        // Analyze
         assertNotNull(result);
         Need actual = needFileDAO.getNeed(need.getName());
         assertEquals(actual.getName(), need.getName());
     }
-    // upto line 97 done by Aniruddha Roy
 
     @Test
     public void testUpdateNeed() {
-        // Setup
         Need need = new Need("Nanapkins", 20, 400, 1000, "Sanitar");
 
-        // Invoke
         Need result = assertDoesNotThrow(() -> needFileDAO.updateNeed(need),
                 "Unexpected exception thrown");
 
-        // Analyze
         assertNotNull(result);
         Need actual = needFileDAO.getNeed(need.getName());
         assertEquals(actual, need);
@@ -122,36 +113,27 @@ public class NeedFileDAOTest {
 
     @Test
     public void testGetNeedNotFound() {
-        // Invoke
         Need need = needFileDAO.getNeed("Wipes");
 
-        // Analyze
         assertEquals(need, null);
     }
 
-    // Look at testDeleteNeedNotFound
-
     @Test
     public void testDeleteNeedNotFound() {
-        // Invoke
         boolean result = assertDoesNotThrow(() -> needFileDAO.deleteNeed("Wipes"),
                 "Unexpected exception thrown");
 
-        // Analyze
         assertEquals(result, false);
         assertEquals(needFileDAO.needs.size(), testNeeds.length);
     }
 
     @Test
     public void testUpdateNeedNotFound() {
-        // Setup
         Need need = new Need("Wipes", 35, 53, 1000, "Education");
 
-        // Invoke
         Need result = assertDoesNotThrow(() -> needFileDAO.updateNeed(need),
                 "Unexpected exception thrown");
 
-        // Analyze
         assertNull(result);
     }
 
