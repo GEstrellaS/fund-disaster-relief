@@ -50,7 +50,7 @@ export class ShoppingCartComponent {
 
   checkout() {
     const username = this.user.username;
-  
+    
     this.cartService.checkout(username).subscribe({
       next: (cart) => {
         console.log('Checkout successful:', cart);
