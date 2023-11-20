@@ -153,6 +153,17 @@ However, if the user enters the username "admin" on the login page, they are dir
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
+
+In Model Tier, we have 4 models.
+
+Announcement Class: This class is designed to represent announcements, with each instance holding an id and detail. The id is automatically generated and incremented for each new instance. It includes standard getters, a setter for detail, and a custom toString method for string representation.
+
+DonationCart Class: Represents a shopping cart-like structure for managing donations. It uses an ArrayList to store Need objects. The class includes methods to add, increment, decrement, and remove items, as well as a method to retrieve all items in the cart as an array.
+
+Need Class: Defines the details of a specific need, such as the item's name, cost, current quantity, required quantity, and type. It includes getters and setters for each field and a custom toString method.
+
+Users Class: Represents user accounts, with fields for username, password, and a flag indicating whether the user is a manager. The class includes getters for these fields and a custom toString method. The donationCart field and associated methods are commented out, suggesting a possible design change or feature deprecation.
+
 ![uml diagram.](uml-placeholder.png)
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
@@ -161,6 +172,47 @@ However, if the user enters the username "admin" on the login page, they are dir
 
 ## OO Design Principles
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
+
+Single responsibility. principle.
+A class should have only one reason to change, meaning it should have only one job or responsibility. In our code, each controller class adheres to this principle by focusing on a specific area of functionality.
+For example, AnnouncementController manages announcements, DonationCartController handles operations related to the donation cart, etc. This separation of concerns ensures that each class has only one reason to change.
+
+AnnouncementController
+Responsibility: Manages all operations related to announcements.
+Examples in Code:
+The getAnnouncements() method retrieves all announcements.
+The createAnnouncement(@RequestBody String announcement) method creates a new announcement.
+These methods show that AnnouncementController is solely responsible for handling HTTP requests that are related to announcements. It's not concerned with other entities like users, needs, or donation carts. This singular focus on announcements is a clear indication of SRP compliance.
+
+DonationCartController
+Responsibility: Handles the functionality related to donation carts.
+Examples in Code:
+The getDonationCart(@PathVariable("username") String usernameString) method fetches a user's donation cart.
+The addItemToCart(...) and deleteItemToCart(...) methods manage adding and removing items from the donation cart.
+The checkout(@PathVariable("username") String usernameString) method processes the cart's checkout.
+
+
+Open/closed principle
+Software entities (like classes, modules, functions, etc.) should be open for extension but closed for modification. This means that the behavior of a module can be extended without modifying its source code. Let's analyze how our code complies with the OCP:
+Example in Code
+DAO Interfaces and Their Implementations:
+Interfaces Defined:
+UserDAO, NeedDAO, and CartDAO are interfaces defining the contract for operations like getUser, createUser, getNeeds, addItemToDonationCart, etc.
+Implementations:
+UserFileDAO, NeedFileDAO, and CartFileDAO are concrete implementations of these interfaces.
+OCP Compliance:
+The use of interfaces allows for extending the behavior of these DAOs without modifying the interface or other parts of the application that use these DAOs. For example, if we decide to switch from a file-based persistence mechanism to a database, we can create new classes like UserDatabaseDAO, NeedDatabaseDAO, and CartDatabaseDAO that implement the respective interfaces. The rest of our application won't need to change because it depends on the interfaces, not the concrete implementations.
+
+
+Dependency Injection in DAO Constructors
+The Dependency Inversion Principle (DIP), one of the SOLID design principles, states that high-level modules should not depend on low-level modules, but both should depend on abstractions. Additionally, abstractions should not depend upon details, but details should depend upon abstractions.
+Example: In our NeedFileDAO and UserFileDAO, we inject dependencies like ObjectMapper and file paths (@Value("${needs.file}") String filename) through their constructors.
+DIP Compliance: These DAOs depend on abstractions (like ObjectMapper) rather than concrete details of JSON processing or file handling. This means we can easily switch out or modify these dependencies without needing to alter the DAOs' internals. For example, if we decide to change the way we handle JSON processing, we can inject a different implementation of a JSON processor without changing the DAO code.
+
+Configuration through External Properties:
+Example: Using @Value annotations to inject properties like file paths (@Value("${needs.file}") String filename).
+DIP Compliance: This is another form of dependency injection where our classes depend on values that are externalized, not hardcoded within the classes themselves. It's an adherence to DIP because our DAOs are not directly dependent on the details of these configurations; they rely on abstractions provided by the framework (Spring in this case) to receive these values.
+
 
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
