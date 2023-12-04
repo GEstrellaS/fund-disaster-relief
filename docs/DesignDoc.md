@@ -18,10 +18,10 @@ Team name: Teamftw, team07
 
 ## Executive Summary
 
-This is a summary of the project. FundMorocco is a relief fund site dedicated to transferring funds to Morocco following the recent earthquake. We aim to provide a platform that allows anyone to easily view available resources and donate to Morocco.
+This is a summary of the project. FundMorocco is a relief fund website focusing on aiding Morocco after a recent earthquake. It not only serves as a donation platform but also allows users to create and log into accounts to view their donation cart and make purchases. Additionally, it features administrative capabilities for managing inventory and posting on a Announcement board, making it a comprehensive tool for both relief efforts and product management.
 
 ### Purpose
-Our purpose is to enable users (helpers) to donate goods to Morocco. They can do this by purchasing goods from our site, which will then be directly shipped to Morocco, or by directly donating money.
+Our purpose is to enable users (helpers) to donate goods to Morocco. They can do this by purchasing goods from our site, which will then be directly shipped to Morocco. 
 
 ### Glossary and Acronyms
 
@@ -47,45 +47,63 @@ FundMorocco allows user creation through signup and will display an error messag
 
 User Features:
 Users can view a list of goods in the inventory.
-This inventory can be filtered by the maximum amount available, updating the display to show only products below the user-defined threshold.
-Live updates are possible through a good search, showing only goods that contain the user-defined search term.
+This inventory can be searched by the name of the good, updating the display to showing only goods that contain the user-defined search term.
 Users can click on any product to access its detail page.
 Users can view, add to, and remove items from their donation cart.
 The donation cart allows users to see their selected goods and proceed to checkout to finalize their donation.
 Users can navigate between the Login, Browse, and Donation Cart pages at any time.
 
 Admin Features:
-The admin can view the inventory, search for specific goods, and add new goods listings on their browse page.
+The admin can view the inventory, search for specific goods, and add new goods and delete listings on their browse page.
 Clicking on a specific product listing redirects the admin to the good's detail page, where they can update its cost and quantity.
 
 ### Definition of MVP
+
 The minimum viable product includes:
 
-Login and logout functionality for Administrators and Customers.
-Functionalities such as searching for goods, adding goods to the donation cart, and checking out.
-Inventory management, which allows the site owner to add, remove, and update goods in the inventory.
-Data persistence, ensuring that the inventory, users, and user shopping carts are saved.
+* Login and logout functionality for Administrators and Customers.
+* Functionalities such as searching for goods, adding goods to the donation cart, and checking out.
+* Inventory management, which allows the site owner to add, remove, and update goods in the inventory.
+* Data persistence, ensuring that the inventory, users, and user donation carts are saved.
 
 ### MVP Features
->  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+
+Top-Level Epics:
+* Accounts
+  * User should be able to create an account.
+  * User cannout create an account with a pre-existing username.
+* Login
+  * Users and Admins should be able to login into their own accounts.
+* Logout
+    * Users and Admins should be able to logout of their own accounts.
+    * Users and Admins cannot logout if they are not logged in.
+* Donation Cart
+  * Users should be able to add products to a cart.
+  * Users should be able to remove products from a cart.
+  * Users should be able to checkout a cart.
+  * Users should be able to see the total price of their cart.
+* Products
+  * Users should be able to see a list of products.
+  * Users should be able to search for a product.
+  * Users should be able to view a product's details.
+  * Admins should be able to add a product.
+  * Admins should be able to remove a product.
+  * Admins should be able to edit a product
 
 ### Enhancements
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
 
+In our MVP, we have introduced a feature that allows the admin to post Announcement on a Announcement board. These Announcements are displayed on the Donation Cupboard page as soon as a user logs in.
+
+To implement this enhancement, an 'Announcement Management' button has been added to the admin page, enabling the admin to effortlessly post and delete Announcements.
 
 ## Application Domain
 
 This section describes the application domain.
 
+FundMorocco's primary domain entity revolves around its users, which are categorized into regular users and an admin, termed as the "U-Fund Manager". Regular users access the platform to view the list of goods available for donation to aid the Morocco Earthquake relief efforts. They can add these goods to their "Donation Cart" and eventually finalize their donation through a checkout process.
+
+The U-Fund Manager, on the other hand, oversees the "Donation Cupboard" which houses all items that can be donated. The manager can add, remove, or modify the list of goods in the inventory, ensuring the platform stays updated with available relief items. Communication is integral, with a Announcement Management button the admin can post Announcements to facilitate updates between users and the admin.
 ![Domain Model](domain-model-placeholder.png)
-
-> _**[Sprint 2 & 4]**
-
-FundMorocco's primary domain entity revolves around its users, which are categorized into regular users and an admin, termed as the "U-Fund Manager". Regular users access the platform to view the list of goods available for donation to aid the Morocco Earthquake relief efforts. They can add these goods to their "Funding Basket" and eventually finalize their donation through a checkout process. In addition, users can communicate via email and track the needs related to the earthquake relief. The U-Fund Manager, on the other hand, oversees the "Donation Cupboard" which houses all donated items. The manager can add, remove, or modify the list of goods in the inventory, ensuring the platform stays updated with available relief items. Communication is integral, with email mechanisms in place to facilitate updates and notifications between users and the admin.
-
-> can discuss the more important domain entities and their relationship
-> to each other._
-
 
 ## Architecture and Design
 
@@ -93,9 +111,9 @@ This section describes the application architecture.
 
 ### Summary
 
-The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
+The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 
-Our application is comprised of three primary components: the view, the MoroccoReliefFund API, and the storage. The MoroccoReliefFund UI, part of the view component, is developed with HTML, CSS, and TypeScript using the Angular framework. The view component is responsible for sending HTTP requests to the eStore API, which then returns HTTP responses. Within the eStore API component, we have the view model and the model. The controller and services, both written in Java, are located in the view model. The controller additionally utilizes the Spring framework. The model comprises our persistence layer and our application model, also written in Java. The eStore API interfaces with the storage through I/O operations. The storage itself consists of JSON files.
+Our application is comprised of three primary components: the view, the uFund API, and the storage. The uFund UI, part of the view component, is developed with HTML, CSS, and TypeScript using the Angular framework. The view component is responsible for sending HTTP requests to the ufund API, which then returns HTTP responses. Within the ufund API component, we have the view model and the model. The controller and services, both written in Java, are located in the view model. The controller additionally utilizes the Spring framework. The model comprises our persistence layer and our application model, also written in Java. The ufund-api interfaces with the storage through I/O operations. The storage itself consists of JSON files.
 
 ![application components](application-components.png)
 
@@ -109,16 +127,15 @@ The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeS
 
 Both the ViewModel and Model are built using Java and Spring Framework. Details of the components within these tiers are supplied below.
 
-
 ### Overview of User Interface
 
 This section describes the web interface flow; this is how the user views and interacts with the web application.
 
 When a user first opens the application, they are presented with the login page. Here, they have the choice to either log in or create an account. If they opt for the sign-up option, they are redirected to a page that prompts them for a username. They can either proceed to create their account or cancel. Choosing "Cancel" redirects the user back to the login page. If they choose "Create Account", the system will establish a new account with the specified username, log them in, and navigate them to the browse page. However, if an account with that username already exists, the user will be notified of the duplication.
 
-When a user inputs an existing username (other than "admin") on the login page and selects the login option, they are granted access to the application and taken to the browse page. Here, they view the inventory of goods, displayed below a menu bar with options like "Login", "Browse", and "Donation Cart". There's also a search bar to find goods by name. Selecting a specific item redirects the user to a detailed page about that good, where they have the option to add it to their cart. If they select the "Donation Cart" from the menu, they can view the items currently in their cart.
+When a user inputs an existing username (other than "admin") on the login page and selects the login option, they are granted access to the application and taken to the Donation Cupboard page. Here, they view the inventory of goods, displayed below a menu bar with options like "Login", "Browse", "Donation Cart", and Announcement Tab . There's also a search bar to find goods by name. Selecting a specific item redirects the user to a detailed page about that good, where they have the option to add it to their cart. If they select the "Donation Cart" from the menu, they can view the items currently in their cart.
 
-However, if the user enters the username "admin" on the login page, they are directed to the admin-browse page. Here, they can view, add, or remove items from the inventory. Selecting a specific item leads them to the admin-good-detail page, allowing them to modify the item's information.
+However, if the user enters the username "admin" on the login page, they are directed to the admin-browse page. Here, they can view, add, or remove items from the inventory and post or remove Announcements. Selecting a specific item leads them to the admin-good-detail page, allowing them to modify the item's information and availability.
 
 
 ### View Tier
@@ -128,7 +145,7 @@ However, if the user enters the username "admin" on the login page, they are dir
 > a flow or "story line" that the reader can follow._
 
 > _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects
-> of the design that you are describing.  (**For example**, in a shopping experience application you might create a
+> of the design that you are describing.  (**For example**, in a donation experience application you might create a
 > sequence diagram of a customer searching for an item and adding to their cart.)
 > As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side
 > to help illustrate the end-to-end flow._
@@ -158,7 +175,7 @@ In Model Tier, we have 4 models.
 
 Announcement Class: This class is designed to represent announcements, with each instance holding an id and detail. The id is automatically generated and incremented for each new instance. It includes standard getters, a setter for detail, and a custom toString method for string representation.
 
-DonationCart Class: Represents a shopping cart-like structure for managing donations. It uses an ArrayList to store Need objects. The class includes methods to add, increment, decrement, and remove items, as well as a method to retrieve all items in the cart as an array.
+DonationCart Class: Represents a donation cart-like structure for managing donations. It uses an ArrayList to store Need objects. The class includes methods to add, increment, decrement, and remove items, as well as a method to retrieve all items in the cart as an array.
 
 Need Class: Defines the details of a specific need, such as the item's name, cost, current quantity, required quantity, and type. It includes getters and setters for each field and a custom toString method.
 
@@ -191,7 +208,6 @@ The getDonationCart(@PathVariable("username") String usernameString) method fetc
 The addItemToCart(...) and deleteItemToCart(...) methods manage adding and removing items from the donation cart.
 The checkout(@PathVariable("username") String usernameString) method processes the cart's checkout.
 
-
 Open/closed principle
 Software entities (like classes, modules, functions, etc.) should be open for extension but closed for modification. This means that the behavior of a module can be extended without modifying its source code. Let's analyze how our code complies with the OCP:
 Example in Code
@@ -202,7 +218,6 @@ Implementations:
 UserFileDAO, NeedFileDAO, and CartFileDAO are concrete implementations of these interfaces.
 OCP Compliance:
 The use of interfaces allows for extending the behavior of these DAOs without modifying the interface or other parts of the application that use these DAOs. For example, if we decide to switch from a file-based persistence mechanism to a database, we can create new classes like UserDatabaseDAO, NeedDatabaseDAO, and CartDatabaseDAO that implement the respective interfaces. The rest of our application won't need to change because it depends on the interfaces, not the concrete implementations.
-
 
 Dependency Injection in DAO Constructors
 The Dependency Inversion Principle (DIP), one of the SOLID design principles, states that high-level modules should not depend on low-level modules, but both should depend on abstractions. Additionally, abstractions should not depend upon details, but details should depend upon abstractions.
